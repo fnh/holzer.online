@@ -1,0 +1,75 @@
+<article data-first-published="2023-05-28">
+<h1>
+<a href="/articles/2023-05-28-side-project-lessons">
+Some lessons from a side project
+</a>
+</h1>
+<p>
+Last year one evening my whole family was asleep unusually early. On contrast, I was not particularly tired, which is equally unusual. I used the time that I unexpectedly had at my disposal to write a tiny web app for managing my bookmarks.
+</p>
+
+<p>
+Initially my goal for this article was to describe the app and its making on both a technical and non-technical level, but I got a bit lost in discussing and justifying technical minutiae, which aren't that essential. What follows is an attempt to describe the psychology of writing a simple, yet useful system in a very limited amount of time.
+</p>
+
+<h2>An itch to scratch</h2>
+
+<p>
+I regularly jump between multiple browsers on several physical and virtual machines. And I like to bookmark quite a bit. If it weren't for the further reasopn, I'd be happy with the browser built-in bookmarks. But I never really found a solution for keeping bookmarks in sync that suited my taste. Still, my requirements are simple, I just want a single place where I could reach all of my bookmarks, and a way to add a link with a single click.
+</p>
+
+<p>
+Certainly, bookmarking-as-a-web-app has been tackled many times over. I could have taken the sane persons' approach and just subscribe to some SaaS, or I could have searched for some open source solution that to host for myself. But then again, I'm a programmer, and it seems this comes with a déformation professionelle that got the better of me. I like to call it inverse vandalism (when vandalism is destroying things just because one can, then inverse vandalism is making things because one can). Those who want to take a look at the code first can do that <a href="/code/minbox/index.js">here</a>.
+</p>
+
+<h2>A few foolish assumptions</h2>
+
+<p>
+Feeling the compulsion to open the IDE and start hacking is the one thing, but there is one very hard limitation: having a chunk of uninterrupted time with good attention span available. Most of that is sold to my employer already. So when I have a good timeslot, in order to get something into a working state, its complexitiy must be rigorously limited. To keep the program as small as possible and overcoming the the hardest limit of all, the available tiem, deciding what is out of scope is probably more important than programming the actual features. And define a certain class problems out of existence is a remarkable productivity boost. 
+</p>
+
+<p>
+Many, if not all, of the assumptions I took are unthinkable in a commercial setting. Yet they turned out to be liberating in this little project. The most fundamental was, that I wanted to create a system, which is intended for me alone to use. This freed me from a whole lot of yak-shaving. Assuming a single user means I don't even need to explicitly model it out. It made it easy to estimate how much (or rather how little) memory my data will consume, and as a second order effect, suddenly the filesystem is justifiable as a good enough storage mechanism. 
+</p>
+
+<p>
+So what remains to have a most rudimentary bookmark manager? A mechanism to add a url, to delete it again and to render the collection of all links. All of which is is accomplished by a single node.js based script which reads in a file of all bookmarks into memory and provides three endpoints. One to render all bookmarks in a single page, one to add another bookmark to the file and one to delete a single bookmark. The endpoint to add a new link is meant to be called via a <a href="https://en.wikipedia.org/wiki/Bookmarklet">bookmarklet</a>.
+</p>
+
+</p>
+From a deployment point of view, I went with what I already had in place: the nginx which serves this website, configured as a reverse proxy with <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic access authentication</a>. Against a certain industry adage, I treat my server more like a pet, and not like cattle. I generally don't administer a system at the time that I want to use it, which makes downtime  a non-issue.
+</p>
+
+<p>
+Of course, a system based on those assumptions is tautologically not be able to scale. But the alternatives would not have potentially scalable software vs. the scrappy single-user system. It was either something I could do in a single good session, or not creating something at all.
+</p>
+
+<h2 id="learnings">Lessons learned</h2>
+
+<p>
+Hillel Wayne dedicated an issue of his fantastic Computher Things newsletter to the question <a href="https://buttondown.email/hillelwayne/archive/how-much-can-you-code/">What can you code up in an hour?</a>. He writes <q>Fast programming is a distinct skill from software engineering. Software engineering principles don’t totally map over.</q> - and this matches quite a bit with what I learned from writing this little script (and running it without major maintainance ever since).
+</p>
+
+<p>
+Don't hesitate to rigorously limit scope. Make an art form out of cutting corners. Minimize the number of moving parts. YAGNI, really.
+</p>
+
+<p>
+If the project is not an exercise for the sake of learning a new technology, use familiar tools. The standard library is your friend. 
+</p>
+
+<p>
+Most best practices are trade-offs, which, if a certain time/complexity threshold is not reached, might not pay off.
+</p>
+
+<p>
+Data &gt; API &gt; UI. If I ever wanted to evolve what I have, the only thing I would definitively want to keep are the over 1000 bookmark I've collected.
+</p>
+
+<p>
+Learn to recognise chunks of good time as they come and grasp them firmly. You don't need anybodys permission to experience the joy that comes in creating something for yourself. Just keep in mind, when project time collides with in-person time with your most important people, that the <a href="https://waitbutwhy.com/2015/12/the-tail-end.html">tail end</a> comes faster than you realize.
+</p>
+
+<time datetime="2023-05-28">2023-05-28</time>
+
+</article>

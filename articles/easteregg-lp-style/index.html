@@ -1,0 +1,106 @@
+<article id="easteregg-lp-style" data-first-published="2023-04-27">
+<h1>
+<a href="/articles/easteregg-lp-style">
+An easteregg - literate programming style
+</a>
+</h1>
+
+<p>
+As often, I am somewhat late to the party, but on the other hand, maybe you are one of <a href="https://xkcd.com/1053/">today's lucky ten-thousand</a>...
+</p>
+
+<p>
+So, did you know, that when you type the words <q>do a barrel roll</q> (without quotation marks) into Google's search field, the page with the results does as you bid, and turns over 360 degrees.
+</p>
+
+<p>
+The implementation of this behavior can be achieved by adding a little style to the body, for example the following class:
+</p>
+
+<style>
+  .somersault { 
+    transform: rotate(1turn); 
+    transition: 2s; 
+  }
+</style>
+
+<p>
+If you want to try it out on this very website, you can use this input field.
+</p>
+
+<p>
+<input style="width: 100%" placeholder="Ask me to do a somersault">
+</p>
+
+<p>
+The necessary logic to apply the styles is provided by this script:
+</p>
+
+<script>
+    let inputElement = document.getElementsByTagName("input").item(0);
+
+    inputElement.addEventListener("input", (element) => {
+        let text = element.target.value;
+
+        if (text === "do a somersault") {
+            document.body.classList.add("somersault");
+            setTimeout(() => {
+                document.body.classList.remove("somersault")
+            }, 2000);
+        }
+    });
+</script>
+
+<p>
+Now, these little snippets of CSS and Javascript are not the whole point of this article. More interesting is, in my eyes at least, that what you just read is a <a href="https://en.wikipedia.org/wiki/Literate_programming">literate program</a>.
+</p> 
+
+<p>
+The code you read is not only a mere nicely formatted textual representation, but <strong>is</strong> the actual HTML style and script elements that control the rendering and behaviour of this website in your browser. This is achieved, by and large, by making the the script and style elements block-level elements, which makes their content visible. The tags themselves are rendered as content of the :before and :after pseudo selectors.
+</p>
+
+<p>
+I've <strike>stolen</strike> adapted the styles from <a href="https://www.colbyrussell.com/LP/debut/">Colby Russell</a>, who created and documented a whole <a href="https://crussell.ichi.city/pager.app.htm">static site generator</a> in this programming style. 
+</p>
+
+<style>
+    body script,
+    body style {
+      display: block;
+      font-family: monospace;
+      white-space: pre;
+      background-color: #DDD;
+    }
+
+    body script::before,
+    body script::after,
+    body style::before,
+    body style::after {
+      font-family: monospace;
+      color: #888;
+    }
+
+    body script::before {
+      margin-bottom: -1em;
+      content: '\3Cscript\3E\0A';
+    }
+
+    body script::after {
+      content: '\0A\3C/script\3E';
+    }
+
+    body style::before {
+      margin-bottom: -1em;
+      content: '\3Cstyle\3E\0A';
+    }
+
+    body style::after {
+      content: '\0A\3C/style\3E';
+    }
+</style>
+
+<p>
+Another nerdy application of this idea is the <a href="https://secretgeek.github.io/html_wysiwyg/html.html">naked, brutalist HTML quine</a> by <a href="https://secretgeek.net/">Leon Bambrick</a>. 
+</p>
+<time datetime="2023-04-27">2023-04-27</time>
+</article>

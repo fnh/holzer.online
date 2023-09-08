@@ -1,0 +1,43 @@
+
+
+<article id="on-the-risks-of-quick-fixes" data-first-published="2021-04-07">
+    <h1><a href="#on-the-risks-of-quick-fixes">On the risks of quick fixes</a></h1>
+    <p>
+        Every software system has its issues. Usually, at any point in time, there are many
+        ideas for new features, enhancements, as well as fixes waiting to be implemented.
+
+        A lot of them are indeed solvable with a few lines. But many of those small tasks
+        are wasted work because they work around a problem, which could and actually <i>should</i>
+        be solved by a slightly larger change, that requires some - but not very much - more effort.
+    </p>
+    <p>
+        If the order of development is optimizing for throughput, the so-called quick
+        wins and quick fixes will be prioritized and the effect results in a well-known
+        problem in scheduling algorithms:
+        <a href="https://en.wikipedia.org/wiki/Starvation_(computer_science)">starvation</a>.
+    </p>
+
+    <blockquote>
+        <p>
+            Resource starvation is a problem encountered in concurrent computing where a process is
+            perpetually denied necessary resources to process its work.
+        </p>
+    </blockquote>
+
+    <p>
+        In this case, the process is the task in the backlog, which would be the fundamental solution
+        to the problem, and the resource is the allocation of time to work on that task.
+    </p>
+
+    <p>
+        Steve McConnell formulated yet another risk of those quick wins and fixes in his
+        "Software Project Survival Guide" (p. 127):
+    </p>
+    <blockquote>
+        <p>
+            The problem with quick and dirty, as some people have said, is that dirty remains
+            long after quick has been forgotten.
+        </p>
+    </blockquote>
+</article>
+

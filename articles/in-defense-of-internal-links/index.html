@@ -1,0 +1,73 @@
+<article id="in-defense-of-internal-links" data-first-published="2023-04-20">
+<h1>
+<a href="/articles/in-defense-of-internal-links/">
+In defense of internal links
+</a>
+</h1>
+
+<p>
+Manuel has expressed some <a href="https://manuelmoreale.com/i-hate-internal-linking">strong objections against internal links</a>. While I indeed think, that Manuel is right with his call to <q>link to other websites as much as you can because that's the best way to help other people discover great content.</q> and can relate to the the overall sentiment of the post, I think condemning internal linking is a bit throwing out the baby with the bathwater.
+</p>
+
+<hr>
+<p>
+<em>Update after first version</em>: Manuel gave me some clarifying feedback via mail, and stated that he in fact the doesn't consider all internal linking as bad. My misunderstanding originates in my interpretation of his statement, that <q>You should only use the first type when strictly necessary</q> - which I overinterpreted as referring to something like standard navigation elements. I'll keep the rest of my reply unchanged, as I want to elaborate on the usefulness of (pontentially dense) internal linking as a design concept beyond commercial aspects. 
+</p>
+<hr>
+
+<p>
+Manuel identifies <q>the world of marketing, search engine optimisations, and analytics</q> as driving force of internal linking. And that might indeed be one reason. As I do not waste any time with SEO, never had analytics in place and don't plan to, I don't market anything to anyone, for I don't want to sell anything to anybody, I don't know too much about such techniques, maybe excessive internal linking in fact is a symptom of these all motives.
+</p>
+
+<p>
+While I don't share these motives, I still purposefully link my former writing. I do so out of a different, and - as I hope to convince my esteemed readers - legitimate reason.
+</p>
+
+<p>
+See, most of my writing starts in my private <a href="https://tiddlywiki.com/">Tiddlywiki</a> instance. Wikis as a writing medium are terrific. I've used more than half a dozen wiki softwares in my life. From the top of my head: MediaWiki, <a href="https://www.pmwiki.org/">PmWiki</a>, <a href="https://zim-wiki.org/">Zim</a>, Githubs built-in Wiki, Redmine, and - tell me you are an enterprise application developer without telling me that you are an enterprise application developer - of course Confluence and Sharepoint. What any wiki software worth using makes trivially easy by design is internal linking. In a wiki there is on a philosophical level never such a thing as a dead internal link, only a page of which gently prompts you to write its first version. 
+</p>
+<p>
+Now, even though my website is only the subset I feel comfortable to share publically, I do like to keep the internal connections wherever it is possible. These internal connections help me to see patterns over time. 
+</p>
+
+<p>
+<a href="https://michaelnielsen.org/">Michael Nielsen</a> has published some notes on <a href="https://michaelnotebook.com/wn/website_enhance.html">how to use a personal website to enhance your ability to think and create</a>, which is kind of a manifesto for his site. Here are some excerpts of this note that resonated very strongly with me (emphasis mine):
+
+<blockquote>
+<p>
+The purpose of the site is to help me think well. This purpose is in opposition to many widely-used norms in online writing. 
+</p>
+<p>[..]</p>
+<p>
+Depth over engagement and audience-building. 
+</p>
+<p>[..]</p>
+<p>
+With this site I can design an interface that better supports my work. For one thing: the site <strong>navigation and organization should help me generate new ideas, and help me see the structure in my work. This site is an interface to my past thinking and possible future creative work.</strong> This means the organization and design of the site are first-class objects. As my understanding changes, so too will the organization, since the organization expresses that understanding. Thus, I should expect to reorganize and consolidate notes often. Both are a type of meaning-making.
+</p>
+</blockquote>
+
+<p>
+So, yes, I admit that my internal links have a self-serving motive, as they enhance my capabilitiy and my thinking. But that is certainly not at the expense of the rest of the world. I still very much desire to help where I can to amplify the good parts of the web. For all <a href="https://en.wikipedia.org/wiki/Dead_Internet_theory">cynical and defeatist takes</a> aside, there is still a lot of that out there. 
+</p>
+<p>
+So that aim in mind, I've decided to treat internal and external links from now on a bit differently regarding their affordances. Internal links, that aren't part of the main navigation, will look just like the standard text and only reveal them as links when someone hovers over them, while all external links will always look like a proper link (I haven't yet figured how I will handle it on the RSS feed though, maybe in the HN endnotes style of linking?). As I consequently use relative links for everything internal, it was quite easy to achieve with a few additional styles:
+</p>
+
+<code><pre>
+article &gt; * &gt; a:not([href^="http"]) {
+    color: #555;
+    text-decoration: none;
+}
+
+article &gt; * &gt; a:not([href^="http"]):hover {
+    text-decoration: underline;
+}
+</pre></code>
+
+<p>
+And since I am on the topic of linking. In the <a href="/articles/hal-abelson-on-bduf/">previous article</a> I forgot the hat tip to <a href="https://www.curiositry.com">Curiositry</a>, who shared a tip <a href="https://autodidacts.io/link-to-segment-of-youtube-video-with-set-stop-time-using-end-url-query-parameter/">how to link to a segment of a youtube video both with a start and end time</a>. I long thought that youtube had removed that feature. As turns out, only in the standard viewer, but not in embedded mode. I hope no product manager on the other side of the big pond reads this, for such a useful feature will then likely be <a href="https://killedbygoogle.com/">killed</a> before the end of the year, which would be a pity.
+</p>
+
+<time datetime="2023-04-21">2023-04-21</time>
+</article>

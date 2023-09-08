@@ -1,0 +1,21 @@
+<article id="api-design-wrap-arrays-into-objects" data-first-published="2023-01-09">
+<h1>
+<a href="/articles/api-design-wrap-arrays-into-objects/">
+API design rule-of-thumb: Wrap all arrays into objects
+</a>
+</h1>
+
+<p>
+Many REST-APIs deal with collections of domain-specific objects. In development, it can be a tempting shortcut to create responses which directly return collections as JSON arrays. It is initially often the path of least resistance for both the creator and the consumer of the API.
+</p>
+
+<p>
+The approach has one problem: it is difficult to extend the API without introducing a breaking change. Two common features, which can typically be omitted in the first version, but are hard to retrofit when the returned type is an array, are metadata and pagination.
+</p>
+
+<p>
+The simple prevention is to wrap all collections into an object from the beginning. Existing clients can then simply ignore all new properties, if they need to be introduced, whereas a change of the type of the response from array to object is guaranteed to break those clients.
+</p>
+
+<time datetime="2023-01-09">2023-01-09</time>
+</article>

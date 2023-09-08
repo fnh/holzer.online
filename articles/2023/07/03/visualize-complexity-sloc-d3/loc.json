@@ -1,0 +1,159 @@
+
+{"header" : {
+  "cloc_url"           : "github.com/AlDanial/cloc",
+  "cloc_version"       : "1.70",
+  "elapsed_seconds"    : 0.0544669628143311,
+  "n_files"            : 21,
+  "n_lines"            : 3438,
+  "files_per_second"   : 385.554819195364,
+  "lines_per_second"   : 63120.8318282695},
+"lib/token_set.js" :{
+    "domain": "core",
+
+  "blank": 57,
+  "comment": 146,
+  "code": 212,
+  "language": "JavaScript"},
+"lib/query_parser.js" :{
+    "domain": "query",
+
+  "blank": 49,
+  "comment": 0,
+  "code": 206,
+  "language": "JavaScript"},
+"lib/index.js" :{
+    "domain": "core",
+
+  "blank": 56,
+  "comment": 239,
+  "code": 197,
+  "language": "JavaScript"},
+"lib/stemmer.js" :{
+    "domain": "core",
+
+
+  "blank": 27,
+  "comment": 25,
+  "code": 171,
+  "language": "JavaScript"},
+"lib/builder.js" :{
+    "domain": "index",
+
+  "blank": 45,
+  "comment": 153,
+  "code": 162,
+  "language": "JavaScript"},
+"lib/query_lexer.js" :{
+    "domain": "query",
+
+  "blank": 38,
+  "comment": 18,
+  "code": 153,
+  "language": "JavaScript"},
+"lib/stop_word_filter.js" :{
+    "domain": "index",
+
+  "blank": 4,
+  "comment": 30,
+  "code": 131,
+  "language": "JavaScript"},
+"lib/pipeline.js" :{
+    "domain": "core",
+
+  "blank": 33,
+  "comment": 139,
+  "code": 95,
+  "language": "JavaScript"},
+"lib/vector.js" :{
+    "domain": "util",
+
+  "blank": 26,
+  "comment": 76,
+  "code": 94,
+  "language": "JavaScript"},
+"lib/set.js" :{
+    "domain": "util",
+
+
+  "blank": 22,
+  "comment": 42,
+  "code": 69,
+  "language": "JavaScript"},
+"lib/match_data.js" :{
+    "domain": "query",
+
+  "blank": 16,
+  "comment": 33,
+  "code": 58,
+  "language": "JavaScript"},
+"lib/query.js" :{
+  "domain": "query",
+
+  "blank": 21,
+  "comment": 111,
+  "code": 56,
+  "language": "JavaScript"},
+"lib/token_set_builder.js" :{
+  "domain": "core",
+
+  "blank": 15,
+  "comment": 2,
+  "code": 52,
+  "language": "JavaScript"},
+"lib/utils.js" :{
+  "domain": "util",
+
+  "blank": 10,
+  "comment": 44,
+  "code": 38,
+  "language": "JavaScript"},
+"lib/tokenizer.js" :{
+  "domain": "core",
+
+  "blank": 11,
+  "comment": 29,
+  "code": 36,
+  "language": "JavaScript"},
+"lib/field_ref.js" :{
+  "domain": "core",
+
+  "blank": 7,
+  "comment": 0,
+  "code": 21,
+  "language": "JavaScript"},
+"lib/token.js" :{
+  "domain": "core",
+
+  "blank": 4,
+  "comment": 39,
+  "code": 15,
+  "language": "JavaScript"},
+"lib/lunr.js" :{
+  "domain": "util",
+  "blank": 4,
+  "comment": 31,
+  "code": 14,
+  "language": "JavaScript"},
+"lib/idf.js" :{
+  "domain": "core",
+  "blank": 4,
+  "comment": 8,
+  "code": 9,
+  "language": "JavaScript"},
+"lib/query_parse_error.js" :{
+  "domain": "query",  
+  "blank": 1,
+  "comment": 0,
+  "code": 7,
+  "language": "JavaScript"},
+"lib/trimmer.js" :{
+  "domain": "index",  
+  "blank": 2,
+  "comment": 19,
+  "code": 6,
+  "language": "JavaScript"},
+"SUM": {
+  "blank": 452,
+  "comment": 1184,
+  "code": 1802,
+  "nFiles": 21} }

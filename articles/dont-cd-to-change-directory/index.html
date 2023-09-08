@@ -1,0 +1,20 @@
+
+<article id="dont-cd-to-change-directory" data-first-published="2022-04-07">
+    <h1><a href="#dont-cd-to-change-directory">Don't 'cd' to change directory </a></h1>
+    <p>
+        We all have only a finite number of <a href="https://www.keysleft.com/">keystrokes left</a> and should
+        <a href="/articles/is-it-worth-my-time/">use them wisely</a>.
+    </p>
+
+    <p>
+        I don't know how many years I typed "cd" in the terminal to change my directory, until I learned that
+        the shell can interpret anything you type, which is no command, to execute implicitly as argument to cd.
+        I enable this by setting an option, with adding the following line to my .bashrc:
+    </p>
+    <code>
+shopt -s autocd
+</code>
+    <p>
+        I hope it might save a few keystrokes for whoever reads this.
+    </p>
+</article>

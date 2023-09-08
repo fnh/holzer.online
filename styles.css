@@ -1,0 +1,280 @@
+:root {
+  --main-bg-color: #F8F8FF;
+  --article-bg-color: #fdfdfd;
+  --main-text-color: #555;
+  --article-code-bg-color: #DDD;
+  --article-code-text-color: #888;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  :root {
+    --main-bg-color: #000;
+    --main-text-color: #E0E0E0;
+    --article-bg-color: #000;
+    --article-code-bg-color: #888;
+    --article-code-text-color: #F5F3F3;
+    --visited-link: #E0485A;
+    --unvisited-link: #F11616;
+  }
+
+  a {
+    color: var(--unvisited-link)
+  }
+
+  a:visited {
+    color: var(--visited-link)
+  }
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+nav ul li {
+  display: block;
+  float: left;
+  padding: 1rem;
+  position: relative;
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+
+nav ul li ul {
+  background: var(--main-bg-color);
+  visibility: hidden;
+  opacity: 0;
+  min-width: 5rem;
+  position: absolute;
+  margin-top: 1rem;
+  left: 0;
+  display: none;
+}
+
+ul li:hover > ul,
+ul li:focus-within > ul,
+ul li ul:hover {
+  z-index: 1;
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+ ul li ul li {
+  clear: both;
+  width: 100%;
+}
+
+
+body {
+    background-color: var(--article-bg-color);
+    color: var(--main-text-color);
+    font-family: ui-serif,Palatino,Georgia,"DejaVu Sans",serif;
+/*Georgia, "DejaVu Sans"*/
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    font-size: 1.25rem;
+    line-height: 2rem;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+body header h1 {
+    font-weight: normal;
+}
+
+body h2 {
+    font-size: medium;
+    font-weight: normal;
+}
+
+main section {
+    max-width: 45rem;
+    height: 100%;
+    align-self: flex-start;
+    margin-left: 3rem;
+    margin-right: 3rem;
+
+}
+
+main article {
+    align-self: flex-start;
+    padding: 0.2rem 1rem 0.2rem 1rem;
+}
+
+@media only screen and (max-width: 819px) {
+    main {
+        background-color: var(--article-bg-color);
+    }
+}
+
+@media only screen and (min-width: 820px) {
+
+    main article {
+        width: 100%;
+        margin-left: 3rem;
+        max-width: 45rem;
+        margin: 1rem 0 1rem 3rem;
+        /* border-radius: .5rem; */
+        background-color: var(--article-bg-color);
+        /* box-shadow: 3px 2px 3px var(--main-text-color); */
+    }
+
+
+}
+
+dl dt {
+    float: left;
+    margin-right: .5rem;
+}
+
+
+main article pre {
+    font-family: monospace;
+    padding: 0.5rem;
+    overflow: auto;
+}
+
+
+article h1 {
+    font-style: italic;
+}
+
+article h1 a {
+    text-decoration: none;
+}
+
+
+article h2 {
+    font-size: 1.25em;
+}
+
+article h3 {
+    font-weight: normal;
+}
+
+blockquote {
+    border-left: 3px solid lightgrey;
+    padding-left: .25rem;
+    margin-left: 0.75rem;
+}
+
+header {
+    background-color: var(--main-bg-color);
+}
+
+/* nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    padding-left: .5rem;
+    white-space: nowrap;
+}
+
+nav ul li:not(:last-of-type)::after {
+    content: " | ";
+} */
+
+
+aside h2 {
+    font-size: medium;
+}
+
+aside p {
+    font-size: smaller;
+}
+
+article time:nth-of-type(1) {
+    display: block;
+    font-size: small;
+    text-align: right;
+}
+
+img {
+    max-width: 100%;
+}
+
+article > * > a:not([href^="http"]) {
+    color: var(--main-text-color);
+}
+
+code pre {
+    display: block;
+    font-size: 14px;
+    line-height: 1rem;
+    font-family: monospace;
+    white-space: pre;
+    background-color: var(--article-code-bg-color);
+    color: var(--article-code-text-color);
+}
+
+body article script,
+body article style {
+    display: block;
+    font-size: 14px;
+    line-height: 1rem;
+    font-family: monospace;
+    white-space: pre;
+    background-color: var(--article-code-bg-color);
+    color: var(--article-code-text-color);
+}
+
+body article script::before,
+body article script::after,
+body article style::before,
+body article style::after {
+    font-family: monospace;
+    color: var(--article-code-text-color);
+}
+
+body article script::before {
+    margin-bottom: -1em;
+    content: '\3Cscript\3E\0A';
+}
+
+body article script::after {
+    content: '\0A\3C/script\3E';
+}
+
+body article style::before {
+    margin-bottom: -1em;
+    content: '\3Cstyle\3E\0A';
+}
+
+body article style::after {
+    content: '\0A\3C/style\3E';
+}
+
+@media print {
+   
+body{
+    display: block;
+   	padding: 40px 0;
+}
+
+body header {
+    display: none;
+    border: 0;
+}
+
+body main article {
+    width: auto;
+    border:  0;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+}

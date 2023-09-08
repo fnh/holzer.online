@@ -1,0 +1,33 @@
+<article id="2023-04-29-dark-mode" data-first-published="2023-04-29">
+<h1>
+<a href="/articles/2023-04-29-dark-mode/">
+Adding dark mode
+</a>
+</h1>
+
+<p>
+At the risk of losing a lot of nerd cred: I, by and large, prefer light mode. But I'm not dogmatic about it.
+</p>
+
+<p>
+Media queries make it very easy to detect the readers preference and CSS custom properties help keeping the rest of the styling clean and non-repetitive. So I thought it would be a right neighbourly thing to add the following:
+</p>
+
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-bg-color: black;
+    --main-text-color: #999;
+    --article-bg-color: black;
+    --article-code-bg-color: #888;
+    --article-code-text-color: #F5F3F3;
+  }
+}
+</style>
+
+<p>
+It looks plausible to me, but visual design isn't my strongest suit. So if someone, who prefers dark mode, has thoughts on it, I'd be thrilled to <a href="/contact.html">hear from you</a>.
+</p>
+
+<time datetime="2023-04-29">2023-04-29</time>
+</article>

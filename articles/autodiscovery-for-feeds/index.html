@@ -1,0 +1,30 @@
+<article id="autodiscovery-for-feeds" data-first-published="2023-01-10">
+<h1>
+<a href="/articles/autodiscovery-for-feeds/" data-first-published="2023-01-10">
+Making feeds automatically discoverable
+</a>
+</h1>
+
+<p>
+I am a big fan of reading websites via a feed reader. 
+Not all websites offer one, and not all that do link it prominently. 
+A good thing therefore is, that a <a href="
+https://blog.whatwg.org/feed-autodiscovery">standardized way to make feeds discoverable</a> for feed readers exists. 
+So, when I find a website that I'd like to subscribe to, I can simply try to copy the url into the reader of my choice and chances are the reader is able to automatically dig out the URL of the feed.
+</p>
+
+<p>
+All that is needed to make it work is a single link tag added to the head. 
+It has three mandatory attributes: <em>href</em> of course for the URL of the feed, <em>rel</em> with value "alternate" and <em>type</em> with a value of either "application/rss+xml", or application/atom+xml, depending on the feed format. The <em>title</em> attribute is optional, but it's useful if a site offers multiple feeds. 
+</p>
+
+<p>
+In quite a lot of cases it works like a charm. It used to work here as well. Now, guess which self-proclaimed fan of feeds thought it would be a good idea to rewrite the template of his personal website and managed to forget putting in the following line into the head:
+</p>
+<p>
+<code>
+&lt;link href="https://holzer.online/feed.xml" rel="alternate" type="application/rss+xml"&gt;
+</code>
+</p>
+<time datetime="2023-01-10">2023-01-10</time>
+</article>

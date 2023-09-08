@@ -1,0 +1,123 @@
+<article id="calculate-contrast-ratio" data-first-published="2023-05-04">
+<h1>
+<a href="/articles/calculate-contrast-ratio/">
+How to calculate the contrast ratio of two colors
+</a>
+</h1>
+
+<p>
+Picking colors for elements on a website is not merely an aesthetic detail, it also matters for accessibility. After I introduced a dark mode for the website, <a href="https://chaoticenginerd.com/">Tosh</a> kindly provided feedback with regard to the color choices I made, or as in this case more importantly did not make.
+</p>
+<p>
+In light mode, I go with the user-agent styles for the links, and there the contrast ratio is fine, but the same choice in dark mode, was under the level of what the <a href="https://www.w3.org/TR/WCAG/">W3C Web content accesibility guidelines</a> recommend. 
+</p>
+<p>
+My go-to resource for figuring out the right colors with regard to the WCAG is the <a href="https://webaim.org/resources/contrastchecker/">WebAIM contrast checker</a>.
+</p>
+<p>
+What up until now I haven't understood was how these figures are actually calculated. And it is actually all laid out in pseudocode in the WCAG recommendation. But since it is spread out, I decided to write it up for my personal reference.
+</p>
+<p>
+So, the spec defines the <a href="https://www.w3.org/TR/WCAG/#dfn-contrast-ratio">constrast ratio</a> as 
+<blockquote>
+(L1 + 0.05) / (L2 + 0.05), where L1 is the relative luminance of the lighter of the colors, and L2 is the relative luminance of the darker of the colors. 
+</blockquote>
+Which leads to two more questions: What is the relative luminance and how do you know which color is the lighter one?
+</p>
+<p>
+To answer the latter: the lighter color is the one with the higher relative luminance. And to answer the former, I quote the <a href="https://www.w3.org/TR/WCAG/#dfn-relative-luminance">definition</a> from the WACG again: The relative luminance is <q>the relative brightness of any point in a colorspace, normalized to 0 for darkest black and 1 for lightest white.</q>
+</p>
+<p>
+But how do I get to this number between 0 and 1? Well, by simply reading on in the spec. There is some some pseudo code, which is easily translatable to Javascript (which I'm doing here in form of a <a href="https://www.colbyrussell.com/LP/debut/">literate program</a> again): 
+</p>
+
+<script>
+/*
+    For the sRGB colorspace, the relative luminance of a color is defined as 
+    L = 0.2126 * R + 0.7152 * G + 0.0722 * B where R, G and B are defined as:
+
+        if RsRGB <= 0.03928 then R = RsRGB/12.92 else R = ((RsRGB+0.055)/1.055) ^ 2.4
+        if GsRGB <= 0.03928 then G = GsRGB/12.92 else G = ((GsRGB+0.055)/1.055) ^ 2.4
+        if BsRGB <= 0.03928 then B = BsRGB/12.92 else B = ((BsRGB+0.055)/1.055) ^ 2.4
+
+    and RsRGB, GsRGB, and BsRGB are defined as:
+
+        RsRGB = R8bit/255
+        GsRGB = G8bit/255
+        BsRGB = B8bit/255
+*/
+
+let Color_sRGB = (Value8bit) => Value8bit / 255;
+
+let N = (v) => {
+    const val = Color_sRGB(v);
+    return (val <= 0.03928) ? val / 12.92 : (((val + 0.055) / 1.055) ** 2.4);
+}
+
+function relativeLuminance({r, g, b}) {
+    return 0.2126 * N(r) + 0.7152 * N(g) + 0.0722 * N(b);
+}
+</script>
+<p>
+Now, the contrast ratio is easy to implement:
+</p>
+<script>
+function contrastRatio(firstColor, secondColor) {
+    let luminance1 = relativeLuminance(firstColor);
+    let luminance2 = relativeLuminance(secondColor);
+
+    // L1 is the relative luminance of the lighter of the colors
+    // the lighter color has the higher relative luminance, so:
+    let L1 = Math.max(luminance1, luminance2); 
+    let L2 = Math.min(luminance1, luminance2);
+
+    return (L1 + 0.05) / (L2 + 0.05);
+}
+</script>
+<p>
+An input type color will return a string in the form "#RRGGBB". To use this as an input for the color parameters of the contrastRatio function I need another utility function.
+</p>
+<script>
+    function hexToRGB(hexColor) {
+        let r = parseInt(hexColor.slice(1, 3), 16);
+        let g = parseInt(hexColor.slice(3, 5), 16);
+        let b = parseInt(hexColor.slice(5, 7), 16);
+        return {r, g, b};
+    }
+</script>
+
+<p>
+So now I can drop in two color pickers: <input type="color" id="c1" value="#F8F8FF">
+<input type="color" id="c2" value="#0000EE"> and to cobble everything together:
+</p>
+
+<script>
+function calculateContrastRatio() {
+    let output = document.getElementById("contrastRatioOutput");
+    let color1 = document.getElementById("c1");
+    let color2 = document.getElementById("c2");
+
+    output.value =
+        contrastRatio(hexToRGB(color1.value), hexToRGB(color2.value));
+}
+
+document.getElementById("c1").addEventListener("change", calculateContrastRatio);
+
+document.getElementById("c2").addEventListener("change", calculateContrastRatio);
+</script>
+
+<p>
+The contrast ratio of the chosen colors is <output id="contrastRatioOutput"> : 1
+</p>
+
+<script>
+calculateContrastRatio(); // to initialize the document properly
+</script>
+
+<p>
+Coming back to the starting point, color contrast is only one aspect with regard to what affordances links should provide, but that is a topic for a different blog post.
+</p>
+
+<time datetime="2023-05-04">2023-05-04</time>
+</article>
+

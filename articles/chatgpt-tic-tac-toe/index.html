@@ -1,0 +1,71 @@
+
+<article id="chatgpt-tic-tac-toe" data-first-published="2022-12-28">
+<h1>
+Using ChatGPT to implement tic-tac-toe in bash
+</h1>
+
+<p>
+I have to admit that I'm a bit late to the party. OpenAI's ChatGPT is currently freely accessibly in a public beta, so I wanted to use the opportunity to evaluate whether I need to start looking for a new job anytime soon. After some more prosaic prompts to the system, I decided to try having it implement a little program. I thought that tic-tac-toe would be a nice experiment. 
+</p>
+
+<p>
+So I prompted it to write a bash script which plays tic-tac-toe using an optimal strategy.
+</p>
+
+<p>
+In the first response, I already got quite a lot of building blocks: 
+</p>
+<ul>
+<li> a data structure for the board (more about that later...)
+<li> a function to print the current state of the board
+<li> a function to check for a draw
+<li> a function to check whether any player has won
+<li> a function to check for whether a move is valid
+<li> and the beginning of a function to decide the move of the program.
+</ul>
+
+<p>
+I assume the API ran in some sort of timeout, as the last function wasn't implemented fully. Therefore I prompted it a for the whole function to make the computer move, and it indeed delivered complete implementation. So I had a lot of functions, but no game to actually play. And naturally - or at least naturally for software developer - I asked if it can generate a game loop, and I wasn't let down. 
+</p>
+<p>
+I copy-pasted the three snippets into a file, held my breath, executed the script, and: it worked. Well, at least sort of. The generated program let the human player make the first move. As the only rational opening move is to take the center field, I didn't immediately discover a subtle bug, until I tried to play a non-optimal game. 
+</p>
+<p>
+The generated code represents the board as an array of nine strings, where an empty field is represented as a single space character. The array was only initialized with 8 strings. To be fair, there are only two hard problems in software engineering: cache invalidation, naming things and off-by-one errors. And who am I, to be too harsh in a code review? I conversationally (it's <em>Chat</em>GPT after all!) asked it whether it could spot and correct the off-by-one mistake in the initialization of the board. And here it started to become obvious that it is a gigantic correlation machine, which although it produces very impressive results (and confidently sounding one's), it has no actual concepts of the things it generates. There is - as expected - no intelligence and no learning in the human sense. Here is how the dialog went down.
+</p>
+
+<blockquote>
+<p>
+You are correct, there is an off-by-one error in the initialization of the board. Currently, the board is initialized as follows:
+</p>
+<code>board=(" " " " " " " " " " " " " " " ")</code>
+</blockquote>
+
+<p>
+Just that the board wasn't initialized as quoted above. This was no reproduction for its initial error, but another one (which it continued to explain in prose - and incorrectly so).
+</p>
+
+<blockquote>
+This creates an array with 13 elements, with indices ranging from 0 to 12.
+</blockquote>
+
+<p>
+After that it created a description of a correct solution in prose, directly followed by yet another incorrect implementation:
+</p>
+
+<blockquote>
+<p>
+However, in the tic tac toe game, the board has only 9 squares, with indices ranging from 0 to 8. To fix this off-by-one error, the board should be initialized as follows:
+</p>
+<code>board=(" " " " " " " " " " " ")</code>
+<p>
+This creates an array with 9 elements, with indices ranging from 0 to 8, which corresponds to the 9 squares in the tic tac toe game.
+</p>
+</blockquote>
+<p>
+It is a fun tool to play around with and I'm not unimpressed by the results. But I don't tremble in fear of being layed off anytime soon due to its existence. For those who are not convinced, Hendrik Erz has written up <a href="https://www.hendrik-erz.de/post/i-get-your-excitement-about-chatgpt-but">a lot more good reasons not to fall for the hype</a>. 
+</p>
+<p>
+If you are interested, you can also read the <a href="/articles/chatgpt-tic-tac-toe/transcript.txt">complete chat transcript</a> and the generated <a href="/articles/chatgpt-tic-tac-toe/ttt.sh">source code</a> (where the correction of the initialization was done manually).
+</p>
+</article>

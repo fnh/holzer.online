@@ -1,0 +1,12 @@
+{
+  "name": "minbox",
+  "version": "1.0.0",
+  "description": "Minbox - a minimal inbox for bookmarks",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --max-old-space-size=64 index.js"
+  },
+  "author": "Fabian Holzer",
+  "license": "MIT"
+}

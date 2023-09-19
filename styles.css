@@ -30,7 +30,7 @@
 nav ul {
   list-style: none;
   margin: 0;
-  padding-left: 0;
+  padding-left: 2rem;
 }
 
 nav ul li {
@@ -60,7 +60,10 @@ ul li ul:hover {
   z-index: 1;
   visibility: visible;
   opacity: 1;
+  border: 1px solid var(--main-text-color);
+  border-top: 0;
   display: block;
+  padding-left: 0;
 }
 
  ul li ul li {
@@ -172,6 +175,7 @@ blockquote {
 
 header {
     background-color: var(--main-bg-color);
+    border-bottom: 1px solid var(--main-text-color);
 }
 
 /* nav ul {

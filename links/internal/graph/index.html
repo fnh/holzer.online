@@ -1,0 +1,59 @@
+<!-- <script src="/scripts/cola.min.js"></script> -->
+
+<script src="/scripts/cytoscape.min.js"></script>
+<!-- <script src="/scripts/cytoscape-cola.js"></script> -->
+<div id="cy" style="width: 100%; height: 100%;"></div>
+
+<intertwingle plugin="content-graph" category="weeknotes,articles" filename="/links/internal/graph/graph.json"></intertwingle>
+
+<script type="module">
+
+    const response = await fetch("/links/internal/graph/graph.json");
+    const graph = await response.json();
+
+    let cy = cytoscape({
+        container: document.getElementById('cy'),
+        elements: graph.elements,
+        layout: {
+            name: 'cose',
+        },
+        style: [
+            {
+                selector: 'node',
+                style: {
+                    'label': 'data(title)',
+
+                    'shape': 'rectangle',
+                    'text-valign': 'center',
+                    'text-halign': 'center',
+                    'color': 'black',
+                    "height": 150,
+                    "width": 150,
+                    'border-width': '2px',
+                    'border-color': 'black',
+                    'background-color': '#399AF9',
+                    "text-wrap": "wrap",
+                    "text-max-width": 80
+                }
+            },
+            {
+                selector: 'edge',
+                style: {
+                    'width': 5,
+                    'line-color': '#ccc',
+                    'target-arrow-color': '#ccc',
+                    'target-arrow-shape': 'triangle',
+                    'curve-style': 'bezier'
+                }
+            },
+        ]
+    });
+
+    cy.on("dblclick", "node", (event) => {
+        let node = event.target.data();
+        window.open(new URL(node.id).pathname, '_newtab');
+
+    })
+
+
+</script>

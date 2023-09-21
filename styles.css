@@ -214,16 +214,16 @@ img {
 article > * > a:not([href^="http"]) {
     color: var(--main-text-color);
 }
-
+/* 
 code pre {
-    display: block;
-    font-size: 14px;
+    width: 100%;
+    font-size: 1rem;
     line-height: 1rem;
     font-family: monospace;
     white-space: pre;
     background-color: var(--article-code-bg-color);
     color: var(--article-code-text-color);
-}
+} */
 
 body article script,
 body article style {

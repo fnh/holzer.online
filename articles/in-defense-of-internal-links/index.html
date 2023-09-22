@@ -54,16 +54,20 @@ So, yes, I admit that my internal links have a self-serving motive, as they enha
 So that aim in mind, I've decided to treat internal and external links from now on a bit differently regarding their affordances. Internal links, that aren't part of the main navigation, will look just like the standard text and only reveal them as links when someone hovers over them, while all external links will always look like a proper link (I haven't yet figured how I will handle it on the RSS feed though, maybe in the HN endnotes style of linking?). As I consequently use relative links for everything internal, it was quite easy to achieve with a few additional styles:
 </p>
 
-<code><pre>
-article &gt; * &gt; a:not([href^="http"]) {
+<code>
+<pre>
+<intertwingle plugin="syntax-highlighting" language="css">
+article > * > a:not([href^="http"]) {
     color: #555;
     text-decoration: none;
 }
 
-article &gt; * &gt; a:not([href^="http"]):hover {
+article > * > a:not([href^="http"]):hover {
     text-decoration: underline;
 }
-</pre></code>
+</intertwingle>
+</pre>
+</code>
 
 <p>
 And since I am on the topic of linking. In the <a href="/articles/hal-abelson-on-bduf/">previous article</a> I forgot the hat tip to <a href="https://www.curiositry.com">Curiositry</a>, who shared a tip <a href="https://autodidacts.io/link-to-segment-of-youtube-video-with-set-stop-time-using-end-url-query-parameter/">how to link to a segment of a youtube video both with a start and end time</a>. I long thought that youtube had removed that feature. As turns out, only in the standard viewer, but not in embedded mode. I hope no product manager on the other side of the big pond reads this, for such a useful feature will then likely be <a href="https://killedbygoogle.com/">killed</a> before the end of the year, which would be a pity.

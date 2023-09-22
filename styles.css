@@ -193,11 +193,6 @@ img {
     max-width: 100%;
 }
 
-article > * > a:not([href^="http"]) {
-    color: var(--main-text-color);
-}
-
-
 body article script,
 body article style {
     display: block;

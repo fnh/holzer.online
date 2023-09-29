@@ -1,0 +1,44 @@
+<article>
+<h1>GDPR, gamified & a serious DX issue</h1>
+<time datetime="2023-09-29 20:35" data-first-published></time>
+
+<p>
+Since this week my parental part-time is over, I'm back to working my standard 40 hours. With so much of my time to available to the company again, sure enough somebody deemed it a good idea to assign a training course on GDPR to me. Ok, in all fairness, that course was probably assigned to just about everybody in the department, in order to tick a box on some spreadsheet, for you know, a bit of corporate cover your ass can go a long way sometimes, but I'm digressing... Anyway as a good compliant employee, I started the course, hoping for the best. It turned out to be gamified, in - I kid you not - the form of detective's story and the look and feel and a UX of a badly programmed game, that reminded me very much on the numerous hobbyist game from the hey-days of Flash...
+</p>
+
+<p>
+But on to a more serious matter of user and developer experience. My son is currently digging a bit into programming with Scratch on the Raspberry Pi. Following along a tutorial, after making the figure on the screen do some funny things, tweaking and exploring here and there, he got to the point where he had a little game that he wanted to spice up by checking for a game over condition.
+</p>
+
+<p>
+So, a quick test: the player has lost their last life, tell me, why is the if branch not executed?
+</p>
+
+<img src="/weeknotes/2023/39/scratch-literal.png">
+
+<p>
+The logic looks quite sound, doesn't it? Perhaps a different notation helps to spot the problem faster:
+</p>
+
+<code><pre><intertwingle plugin="syntax-highlighting">
+lives--;
+if ("lives" < 1) {
+    console.log("Game over");
+}</intertwingle></pre></code>
+
+<p>
+So, what happened? While following the tutorial he didn't drag the variable as a block, but typed it out into the field, which makes it a string literal (a legitimate thing to compare something with). Referencing the actual variable looks like that (not quite an optical difference like night and day):
+</p>
+
+<img src="/weeknotes/2023/39/scratch-variable.png">
+
+<p>
+As block-based programming languages have found their way into school curricula as well, I was wondering how many kids' enthusiasm for computing might get curbed by such little matters of affordances that cause confusion or frustration.
+</p>
+
+<p>
+Last, but not least, I added two items two the site: a client-side <a href="/search/">full-text search</a> (powered by <a href="https://lunrjs.com">lunr.js</a>) and a <a href="/colophon/">Colophon</a>, because I always like to read about the website setup of other people for inspiration and also to give credit where credit is due to a few libraries I use, which were created by people who generously open-sourced them.
+</p>
+
+</article>
+

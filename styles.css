@@ -93,12 +93,12 @@ main {
 }
 
 body header h1 {
-    font-weight: normal;
+    font-weight: bold;
 }
 
 body h2 {
     font-size: 1.5rem;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 main section {
@@ -144,8 +144,13 @@ main article pre {
     font-family: monospace;
     padding: 0.5rem;
     overflow: auto;
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 
+code pre {
+    border: 1px solid var(--article-code-bg-color);
+}
 
 article h1 {
     font-style: italic;
@@ -160,7 +165,7 @@ article h2 {
 }
 
 article h3 {
-    font-weight: normal;
+    font-weight: bold;
 }
 
 blockquote {

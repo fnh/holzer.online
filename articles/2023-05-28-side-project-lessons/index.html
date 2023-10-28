@@ -27,7 +27,7 @@ Certainly, bookmarking-as-a-web-app has been tackled many times over. I could ha
 <h2>A few foolish assumptions</h2>
 
 <p>
-Feeling the compulsion to open the IDE and start hacking is the one thing, but there is one very hard limitation: having a chunk of uninterrupted time with good attention span available. Most of that is sold to my employer already. So when I have a good timeslot, in order to get something into a working state, its complexitiy must be rigorously limited. To keep the program as small as possible and overcoming the the hardest limit of all, the available tiem, deciding what is out of scope is probably more important than programming the actual features. And define a certain class problems out of existence is a remarkable productivity boost. 
+Feeling the compulsion to open the IDE and start hacking is the one thing, but there is one very hard limitation: having a chunk of uninterrupted time with good attention span available. Most of that is sold to my employer already. So when I have a good timeslot, in order to get something into a working state, its complexity must be rigorously limited. To keep the program as small as possible and overcoming the the hardest limit of all, the available tiem, deciding what is out of scope is probably more important than programming the actual features. And define a certain class of problems out of existence is a remarkable productivity boost. 
 </p>
 
 <p>
@@ -35,21 +35,21 @@ Many, if not all, of the assumptions I took are unthinkable in a commercial sett
 </p>
 
 <p>
-So what remains to have a most rudimentary bookmark manager? A mechanism to add a url, to delete it again and to render the collection of all links. All of which is is accomplished by a single node.js based script which reads in a file of all bookmarks into memory and provides three endpoints. One to render all bookmarks in a single page, one to add another bookmark to the file and one to delete a single bookmark. The endpoint to add a new link is meant to be called via a <a href="https://en.wikipedia.org/wiki/Bookmarklet">bookmarklet</a>.
+So what remains to have a most rudimentary bookmark manager? A mechanism to add a url, to delete it again and to render the collection of all links. All of which is accomplished by a single node.js based script which reads in a file of all bookmarks into memory and provides three endpoints. One to render all bookmarks in a single page, one to add another bookmark to the file and one to delete a single bookmark. The endpoint to add a new link is meant to be called via a <a href="https://en.wikipedia.org/wiki/Bookmarklet">bookmarklet</a>.
 </p>
 
 </p>
-From a deployment point of view, I went with what I already had in place: the nginx which serves this website, configured as a reverse proxy with <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic access authentication</a>. Against a certain industry adage, I treat my server more like a pet, and not like cattle. I generally don't administer a system at the time that I want to use it, which makes downtime  a non-issue.
+From a deployment point of view, I went with what I already had in place: the nginx which serves this website, configured as a reverse proxy with <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">Basic access authentication</a>. Against a certain industry adage, I treat my server more like a pet, and not like cattle. I generally don't administer a system at the time that I want to use it, which makes downtime a non-issue.
 </p>
 
 <p>
-Of course, a system based on those assumptions is tautologically not be able to scale. But the alternatives would not have potentially scalable software vs. the scrappy single-user system. It was either something I could do in a single good session, or not creating something at all.
+Of course, a system based on those assumptions is tautologically not able to scale. But the alternatives would not have potentially scalable software vs. the scrappy single-user system. It was either something I could do in a single good session, or not creating something at all.
 </p>
 
 <h2 id="learnings">Lessons learned</h2>
 
 <p>
-Hillel Wayne dedicated an issue of his fantastic Computher Things newsletter to the question <a href="https://buttondown.email/hillelwayne/archive/how-much-can-you-code/">What can you code up in an hour?</a>. He writes <q>Fast programming is a distinct skill from software engineering. Software engineering principles don’t totally map over.</q> - and this matches quite a bit with what I learned from writing this little script (and running it without major maintainance ever since).
+Hillel Wayne dedicated an issue of his fantastic Computer Things newsletter to the question <a href="https://buttondown.email/hillelwayne/archive/how-much-can-you-code/">What can you code up in an hour?</a>. He writes <q>Fast programming is a distinct skill from software engineering. Software engineering principles don’t totally map over.</q> - and this matches quite a bit with what I learned from writing this little script (and running it without major maintainance ever since).
 </p>
 
 <p>
@@ -65,7 +65,7 @@ Most best practices are trade-offs, which, if a certain time/complexity threshol
 </p>
 
 <p>
-Data &gt; API &gt; UI. If I ever wanted to evolve what I have, the only thing I would definitively want to keep are the over 1000 bookmark I've collected.
+Data &gt; API &gt; UI. If I ever wanted to evolve what I have, the only thing I would definitively want to keep are the over 1000 bookmarks I've collected.
 </p>
 
 <p>

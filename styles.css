@@ -248,17 +248,17 @@ th[data-sort-able-sort-order="desc"]::before {
     content: "⬇";
 }
 
-.skip-to-content-link {
+header > nav > a:first-of-type {
     height: 30px;
     left: 50%;
     padding: 8px;
     position: absolute;
-    transform: translateY(-100%);
+    transform: translateY(-200%);
     transition: transform 0.3s;
 }
 
 
-.skip-to-content-link:focus {
+header > nav > a:first-of-type:focus {
     transform: translateY(0%);
 }
 

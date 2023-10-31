@@ -38,7 +38,7 @@ class SortTable extends HTMLTableElement {
     }
 
     getHeaderRow() {
-        return super.tHead?.rows[0];
+        return this.tHead?.rows[0];
     }
 
     getTableBody() {
@@ -62,10 +62,10 @@ class SortTable extends HTMLTableElement {
 
         this.getHeaderCells().forEach((th, index) => {
             th.tabIndex = 0;
-            this.role = "button";
-            this.style.cursor = "pointer";
-            this.on(th, "click", () => this.sortBy(index, "default"))
+            th.setAttribute("role", "button");
+            th.style.cursor = "pointer";
 
+            this.on(th, "click", () => this.sortBy(index, "default"))
             const keydownHandler = (direction = "default") => this.sortBy(index, direction)
             this.on(th, "keydown", (e) => this.onApplicableKeyDown(e, keydownHandler));
         });
@@ -80,7 +80,10 @@ class SortTable extends HTMLTableElement {
         const ordering =
             this.lookup({ valueOf: key, inTable: SortTable.DIRECTION_OF_KEY });
 
-        ordering && sortBy(ordering);
+        if (ordering) {
+            event.preventDefault();
+            sortBy(ordering);
+        } 
     }
 
     ensureHeaderRow() {
@@ -138,9 +141,7 @@ class SortTable extends HTMLTableElement {
 
         let headerCells = this.getHeaderCells();
 
-        headerCells.forEach((cell, index) => {
-            console.log({ cell, index, column })
-            if (index == column) {
+        headerCells.forEach((cell, index) => {            if (index == column) {
                 cell.dataset.sortAbleSortOrder = direction;
             } else {
                 delete cell.dataset.sortAbleSortOrder;

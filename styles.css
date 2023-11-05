@@ -257,6 +257,9 @@ header > nav > a:first-of-type {
     transition: transform 0.3s;
 }
 
+section pre {
+    white-space: pre-wrap;
+}
 
 header > nav > a:first-of-type:focus {
     transform: translateY(0%);

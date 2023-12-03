@@ -82,6 +82,12 @@ ul.intertwingle-toc {
     list-style: none;
 }
 
+ul.intertwingle-toc-top {
+    list-style: none;
+    padding: 0;
+}
+
+
 
 body {
     background-color: var(--article-bg-color);
@@ -248,7 +254,7 @@ th[data-sort-able-sort-order="desc"]::before {
     content: "⬇";
 }
 
-header > nav > a:first-of-type {
+header>nav>a:first-of-type {
     height: 30px;
     left: 50%;
     padding: 8px;
@@ -261,7 +267,7 @@ section pre {
     white-space: pre-wrap;
 }
 
-header > nav > a:first-of-type:focus {
+header>nav>a:first-of-type:focus {
     transform: translateY(0%);
 }
 

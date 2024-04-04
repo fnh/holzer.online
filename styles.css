@@ -87,8 +87,6 @@ ul.intertwingle-toc-top {
     padding: 0;
 }
 
-
-
 body {
     background-color: var(--article-bg-color);
     color: var(--main-text-color);
@@ -118,7 +116,7 @@ body h2 {
     font-weight: bold;
 }
 
-main section {
+main > section {
     max-width: 45rem;
     height: 100%;
     align-self: flex-start;
@@ -160,6 +158,13 @@ main article pre {
     font-family: monospace;
     padding: 0.5rem;
     overflow: auto;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+main article aside {
+    border: 1px dashed grey;
+    padding: 1rem;
     font-size: 1rem;
     line-height: 1.5rem;
 }
@@ -264,6 +269,8 @@ header>nav>a:first-of-type {
 }
 
 section pre {
+    font-size: 1rem;
+    line-height: 1rem;
     white-space: pre-wrap;
 }
 

@@ -1,0 +1,36 @@
+<meta name="topics" content="web-development">
+<article>
+<h1>
+Configure basic auth in nginx only for specific HTTP methods 
+</h1>
+<time datetime="2024-04-09 22:30"></time>
+<p>
+I am using nginx as reverse proxy for a handful of small applications. I recently added one where for convenience I only wanted to require basic authentication for the endpoints that write data.
+</p>
+<p>
+The nginx configuration files are not exactly my daily concern, so to save future me (or maybe future you) some headaches with trial and error, here is what worked (and what didn't).
+</p>
+<p>
+As I wanted to only secure POST requests, my first attempt was to formulate it using positive logic with an if directive. Didn't work out and the good folks at nginx even wrote an article about <a href="https://www.nginx.com/resources/wiki/start/topics/depth/ifisevil/">why if is evil when used in location context</a> - which happens to be exactly the context I was in.
+</p>
+<p>
+The alternative is to enumerate HTTP methods as being exempt from authentication in a limit_except directive. If you model your API like a halfway sane person (and not for instance use GraphQL...) that means GET (HEAD and OPTIONS could be thrown in for good measure). But beware: the proxy_pass directive must not be put into the limit_except block. It will make the nginx config invalid. <code>nginx -t</code> will yell at you, and if you restart anyway, or like a certain person don't bother to testing the config changes before you restart, the server will crash immediately.
+</p>
+<p>
+So, the final snippet looks like this:
+</p>
+<code><pre>
+    location /my-application/api/ {
+        limit_except GET {
+            auth_basic "Restricted";
+            auth_basic_user_file /path/to/.htpasswd;
+        }
+
+        proxy_pass http://127.0.0.1:12345/;
+        proxy_buffering off;
+        proxy_set_header Host https://$host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+</pre></code>
+</article>

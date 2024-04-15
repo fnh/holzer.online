@@ -278,6 +278,14 @@ header>nav>a:first-of-type:focus {
     transform: translateY(0%);
 }
 
+details p {
+    margin-left: 1rem;
+}
+
+summary h2 {
+    display: inline;
+}
+
 @media print {
 
     body {

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Fabian's public notepad</title>
+
+    <meta charset="utf-8">
+    <meta name="template" content="now">
+
+    <meta name="author" content="Fabian Holzer">
+    <meta name="description"
+        content="Thoughts on topics like software engineering, web development, blogging and the web in general">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="/favicon.svg" type="image/svg">
+    <link rel="canonical" href="https://holzer.online/">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="alternate" type="application/rss+xml" href="https://holzer.online/feed.xml">
+
+</head>
+
+<intertwingle plugin="create-title"></intertwingle>
+
+<body>
+
+    <header>
+        <intertwingle plugin="include" file="main-navigation.html"></intertwingle>
+    </header>
+
+    <main id="main">
+    <article>
+    <h1>Now</h1>
+
+    <intertwingle plugin="main-content"></intertwingle>
+
+    <p>
+    <small>This page was inspired by Derek Sivers' <a href="https://nownownow.com/">now page movement</a>.</small>
+    </p>
+
+    <p id="previously"></p>
+    <intertwingle plugin="previous-page" target="#previously" link-text="Previously"></intertwingle>
+    </article>
+
+    </main>
+
+</body>
+
+</html>

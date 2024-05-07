@@ -1,0 +1,113 @@
+<article>
+<h1>
+Ontology is overrated, revisited
+</h1>
+<time datetime="2024-05-05 18:30"></time>
+
+<p>
+In an age of silos and centralization, trying to curate the web may seem like a folly. Luckily, if you're looking, you'll still be able to find plenty of individual initiatives, that provide lenses into the worthwhile parts of the web. If you have a few hours to spare to go down rabbit holes, I'd heartily recommend Toms <a href="https://bukmark.club/directory/">bukmark.club</a>, a little directory of little directories.
+</p>
+
+<p>
+Such directories make me reminiscent of what Yahoo or DMOZ represented in their hey-days: portals to the knowledge of the world and options to connect with people over shared interest, that would not have been thinkable just a few short years prior. They are not the only form of curation and sharing links though: from the venerable blogroll, over regularly updated link blogs, markdown files in a git repo (like the various <a href="https://github.com/sindresorhus/awesome">awesome-lists</a>), OPML exports of feed lists - there are many little acts of connection, that always were the heart and soul of the web. 
+</p>
+
+<p>
+Yet, in its vastness I perceive all those attempts of bringing order  as far scattered. Now, one could just shrug and say that such is the nature of the independent open web, but I think there is a ton of potential to unearthed. How can the good things be amplified in a time where we are collectively being drowned in automatically generated noise?
+</p>
+
+<p>
+Clay Shirky in his 2005 essay <a href="https://archive.org/details/Ontology_is_Overrated_Categories_Links_and_Tags/page/n11/mode/2up">Ontology is Overrated</a> layed out a critique of the conceptual shortcomings of large centralized web directories, and reasons why Google ate Yahoo's lunch. Among many observations he wrote <q>Browse versus search is a radical increase in the trust we put in link infrastructure</q>. It is congruent with my memory - but two decades down the road, that initial increase in trust has eroded, if not completely evaporated. The Big Tech corporations all have shown their true colors rather fast, and all tech-optimism aside, noone should not be suprised that corporation first and foremost want to make profit.
+</p>
+
+<p>
+So how could the disjoint efforts of idealistic individuals be brought together, without introducing centralization or putting any burden on those who already do the work of curation itself, maybe even in a form where the sum is more than the parts? To that end, I'd like to explore an idea, that Shirky formulated, a bit more in depth: 
+</p>
+
+<blockquote>
+You don't merge tagging schemes at the category level and then see what the contents are. [...] You merge from the URLs, and then try and derive something about the categorization from there.
+</blockquote>
+
+<p>
+Suppose, you would like to make use of a number of smaller link collections: manually browsing through every single link collection known to you would likely turn out to be a tad cumbersome. What if you could peruse a personalized aggregation of collections in a single place? Could you somehow build a set-union of a (hand picked) selection of web directories?
+</p>
+
+<p>
+To paraphrase Shirkys insight: As much as the size, the organization structure, categorization schemas, and formats of a collection or directory may vary, there is a lowest common denominator: each collection could be modelled as a flat list of entries, where each entry represents link. The humbe URL pulls double duty: it is both the most important bit of information (i.e. arguably would represent the essence of an entry all by itself), as well as the ID and, taking the plurality of collections in existence into account, also would act as the foreign key. With regard to the metadata, certainly a few more properties on each items are desirable. I think a title is rather uncontroversial, also a short description might be be a common characteristic. And as many directories are not just lists, but also have some sort of categorization schema, that should be represented somehow as well. Here it starts to get less clear. Are categories disjoint? Can one entry be part of multiple categories? Are there  multiple levels of hierarchy? Are tags used additionally? Can categories be thought of as a special case of a set of tags?
+</p>
+
+<p>
+Having arrived at a point where such ambiguities might lead to analysis paralysis I need to invoke <a href="/articles/hal-abelson-on-bduf/">Ableson's dictum</a>: people who believe that you design everything before you implement it, basically are people who haven't designed very many things. So, let me start sketching out the problem in code instead of words.
+</p>
+
+<code><pre><intertwingle plugin="syntax-highlighting" language="javascript">
+class Entry {
+  constructor(url, title, tags) {
+    this.url = url;
+    this.title = title || url;
+    this.titles = [this.title];
+    this.tags = [...new Set( ...(tags || [])];
+  }
+}
+</intertwingle></pre></code>
+
+<p>
+Ok, not much more than an anemic model, let's doodle a bit with it: A single entry in a web directory has a URL, a title (and where that is forgone the URL can be asked to pull triple duty) and associated tags (just a deduplicated list of strings). If there were two directories that want to compare notes, an entry could be enriched by adding the the metadata from the other source to its properties:
+</p>
+
+<code><pre><intertwingle plugin="syntax-highlighting" language="javascript">
+  enrich(entry) {
+    if (this.url != entry.url) { 
+      // basic sanity check.
+      // no use to compare apples and oranges
+      return;
+    }
+
+    if (!this.titles.includes(entry.title)) {
+      this.titles.push(entry.title);
+    }
+
+    this.tags = [...new Set([...this.tags, ...entry.tags])];
+  }</intertwingle></pre></code>
+<p>
+From another angle: a single collection, a web directory for example, could be represented as a map of URLs and associated metadata, that are tended to over time, by adding entries one by one:
+</p>
+
+<code><pre><intertwingle plugin="syntax-highlighting" language="javascript">
+class WebDirectory {
+  #knownUrls = new Map();
+
+  [Symbol.iterator]() {
+    return this.#knownUrls[Symbol.iterator]()
+  };
+
+  add(entry) {
+    if (this.#knownUrls.has(entry.url)) {
+      this.#knownUrls.get(entry.url).enrich(entry);
+    } else {
+      this.#knownUrls.set(entry.url, entry);
+    }
+  }
+}</intertwingle></pre></code>
+
+<p>
+Now two directories could, as Shirky suggested, indeed be merged from the URLs.
+</p>
+
+<code><pre><intertwingle plugin="syntax-highlighting" language="javascript">
+  join(otherDirectory) {
+    for (let [url, entry] of otherDirectory) {
+      this.add(entry);
+    }
+  }
+</intertwingle></pre></code>
+
+<p>
+That little model by itself doesn't yet achieve very much. There are two important, but uncovered aspects for this to become actually useful: a way to map the structures of existing collections and directories into such a common format and then on top of these mappings there need to be one (or rather: many) views.
+</p>
+
+<p>
+Oh dear, I think I've just wrote myself a high-level spec for a side project...
+</p>
+
+</article>

@@ -1,7 +1,7 @@
 <meta name="category" content="homepage">
 
 <section>
-
+<div>
 <p>Hello there!</p>
 <p>
 Welcome to my little corner of the web.
@@ -22,6 +22,24 @@ If you are interested in what I'm currently up to, I also have a <a href="/now/"
 Last updated <span id="lastUpdateOutlet"></span>:
 <intertwingle plugin="last-update" category="articles,weeknotes,now,projects,more,about"></intertwingle>
 </p>
+
+</div>
+
+<aside>
+<h2>Last articles & notes</h2>
+<ul style="list-style: none; padding-left: 0.5rem;">
+<intertwingle plugin="last-pages-of" 
+        category="articles,weeknotes"
+        grouped-by="month"
+        number-of-items="10">
+<template>
+<li style="padding-bottom: 0.5rem; font-size: 1rem; line-height: 1rem;"><intertwingle data-outlet></intertwingle></li>
+</template>
+</intertwingle>
+</ul>
+
+<intertwingle plugin="rewrite-dates" date-format="{m} / {yyyy}"></intertwingle>
+</aside>
 
 </section>
 

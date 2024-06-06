@@ -161,8 +161,8 @@ main article {
 
 @media (min-width: 68rem) {
 
-    section:has(aside),
-    article:has(aside) {
+    section:has(aside:last-child),
+    article:has(aside:last-child) {
         display: grid;
         min-width: 65rem;
         grid-template-columns: auto 19rem;

@@ -1,0 +1,323 @@
+<meta name="category" content="articles">
+<article>
+<h1>Receiving webmentions from (almost) nothing
+</h1>
+<time datetime="2024-06-13 21:12">
+
+<p>
+The indieweb carnival for June 2024 is hosted by Andrei, who has dealt out the topic <a href="https://andrei.xyz/post/indieweb-carnival-june-2024-diy-something-from-nothing/
+">DIY — Something from (Almost) Nothing</a>,  which I think is a brilliant prompt. I'll use this as an opportunity (or excuse?) to create something that was on my <a href="/articles/write-down-your-makers-bucket-list/">to-make list</a> for quite some time now: adding a webmention receiver endpoint to my site. I think as this also ticks a few boxes of list <a href="https://indieweb.org/principles">principles of building on the indie web</a>: Make what you need, use what you make, document your stuff, open source your stuff and have fun.
+</p>
+<p>
+To additionally honor the motto "doing something from <em>almost</em> nothing": I've chosen to do it in plain JS and restrict myself to the APIs that are in the current LTS version of Node.js, no third-party libraries, no npm install, just the platform.
+</p>
+
+<p>
+So, let's dig out the specification, read through what is expected if you want to <a href="https://www.w3.org/TR/webmention/#receiving-webmentions">receive webmentions</a> and start programming.
+</p>
+
+<blockquote>
+Upon receipt of a POST request containing the source and target parameters, the receiver SHOULD verify the parameters [..] and then SHOULD queue and process the request asynchronously, to prevent DoS attacks. [..] If the receiver processes the request asynchronously but does not return a status URL, the receiver MUST reply with an HTTP 202 Accepted response.
+</blockquote>
+
+<p>
+So, the endpoint expects to receive POST requests, with a form-encoded payload. It has to do some sanity checks synchronously (validation of the request), and then in a seperate process, do some deeper inspections to ensure that the webmention, well, actually does mention a URL of the receiving server, so:
+</p>
+<pre><code><intertwingle plugin="syntax-highlighting">const server = http.createServer((request, response) => {
+    let content = getBody(request);
+
+    content.then((body) => {
+        let mention = toMention(body);
+
+        if (isValid(request, mention)) {
+            if (isEnqueueable(mention)) {
+                queue.push(mention);
+                response.writeHead(202);
+            } else {
+                response.writeHead(500);
+            }
+        } else {
+            response.writeHead(400);
+        }
+        response.end();
+    }).catch(() => {
+        response.writeHead(500);
+        response.end();
+    });
+});
+server.listen(PORT);</intertwingle></code></pre>
+
+<p>
+The platform-features-only policy already has implications. The first one: reading out the body with the callback-style API of nodes http.IncomingMessage is a bit inconvenient, that's why I wrap it into a little helper:
+</p>
+
+<pre><code><intertwingle plugin="syntax-highlighting">async function getBody(request) {
+    return new Promise((resolve) => {
+        let body = [];
+        request.on("data", part => {
+            body.push(part);
+        });
+
+        request.on("end", () => {
+            let result = Buffer.concat(body).toString();
+            resolve(result);
+        });
+    });
+}</intertwingle></code></pre>
+
+<p>
+As the receiver is essentially a single endpoint, I don't really bother with proper routing. Still, had I opted into using a framework, say the venerable express, some of the sanity checks, that I now need to push down into the request validation logic, would have implicitly been handled (for example: I would not need to check whether I've indeed received a POST request). 
+</p>
+
+<pre><code><intertwingle plugin="syntax-highlighting">function isValid(request, mention) {
+    let isBadRequest =
+        BAD_REQUEST_PREDICATES.some(isBad =>
+            isBad({ mention, request })
+        );
+
+    return !isBadRequest;
+}</intertwingle></code></pre>
+
+<p>
+The request validation is straightforward. I check against a number of reasons to see if if find any reason to consider the request to be a client-side error, if nothing is found, well then it is at least worthy of some further processing.
+</p>
+
+<p>
+The validation is called with the request and a webmention object that is extracted from the request by wrapping the form-encoded payload into URLSearchParams, and looking for the expected properties:
+</p>
+
+<pre><code><intertwingle plugin="syntax-highlighting">function toMention(body) {
+    let payload = new URLSearchParams(body);
+
+    if (!payload.get("source") || !payload.get("target")) {
+        return null;
+    }
+
+    return {
+        source: payload.get("source"),
+        target: payload.get("target"),
+    }
+}</intertwingle></code></pre>
+
+<p>
+Now, what indicates a client-side error? Well, not passing a few basic sanity-checks, each a one-liner:
+</p>
+
+<pre><code><intertwingle plugin="syntax-highlighting">let BAD_REQUEST_PREDICATES = [
+    ({ request }) => request.method !== "POST",
+    ({ request }) => !request.headers,
+    ({ request }) =>
+        request.headers["content-type"] 
+            !== "application/x-www-form-urlencoded",
+
+    ({ mention }) => !mention,</intertwingle></code></pre>
+
+<p>
+Further according to the spec: <q>The receiver MUST reject the request if the source URL is the same as the target URL.</q>
+</p>
+
+<pre><code><intertwingle plugin="syntax-highlighting">    ({ mention }) => mention.target === mention.source,</intertwingle></code></pre>
+
+<blockquote>
+The receiver MUST check that source and target are valid URLs and are of schemes that are supported by the receiver. (Most commonly this means checking that the source and target schemes are http or https).
+</blockquote>
+
+<pre><code><intertwingle plugin="syntax-highlighting">    ({ mention }) => !URL.canParse(mention.source),
+    ({ mention }) => !URL.canParse(mention.target),
+    ({ mention }) =>
+        !(mention.target.startsWith("https://")
+            || mention.target.startsWith("http://"))</intertwingle></code></pre>
+
+<p>
+Thank goodness URL.canParse is in the ES2022 baseline - otherwise you would need to wrap the URL constructor in a try catch block to check whether it is actually parsable. Eww...
+</p>
+
+<blockquote>
+The receiver SHOULD check that target is a valid resource for which it can accept Webmentions. This check SHOULD happen synchronously to reject invalid Webmentions before more in-depth verification begins. What a "valid resource" means is up to the receiver.
+</blockquote>
+
+<pre><code><intertwingle plugin="syntax-highlighting">
+    ({ mention }) =>
+        ALLOWED_TARGET_BASE_URLS.length > 0
+        && !ALLOWED_TARGET_BASE_URLS.some(
+            allowedBaseUrl => mention.target.startsWith(allowedBaseUrl)
+        ),</intertwingle></code></pre>
+</intertwingle></code></pre>
+
+<p>
+The allowed targets are a list of base url, that is read in from a file when the server is started. In another iteration, that file could be filled with a sitemap.xml (or something similar) and do a somewhat better check than just a startsWith, but for the moment, I consider it <a href="/articles/satisficing/">good enough</a> for my purposes. 
+</p>
+
+<p>
+So a first round of sanity checks are passed. Before I proceed and try to verify the webmention, I do some more synchronous checks, to prevent potential abuse, that are not in the spec: first of all, a mention that is enqueued for processing already will not be added again and also legitimate-looking mentions that failed to verify are stored and after half a dozen attempts will get dropped, as I don't want my machine to become part of a DDoS attack on somebody elses server. Lastly: I will re-verify a mention earliest after 24 hours have passed.
+</p>
+
+<pre><code><intertwingle plugin="syntax-highlighting">function isDuplicate(mention) {
+    return function (existing) {
+        return existing.source === mention.source
+            && existing.target === mention.target;
+    }
+}
+
+function isEnqueueable(mention) {
+    let alreadyEnqueued = queue.find(isDuplicate(mention));
+    if (alreadyEnqueued) {
+        return false;
+    }
+
+    let failedValidations = failures[mention.source];
+
+    if (failedValidations && failedValidations > 5) {
+        return false;
+    }
+
+    let alreadyValidated =
+        received.webmentions.find(isDuplicate(mention));
+
+    if (alreadyValidated) {
+        let elapsedTime = Date.now() - alreadyValidated.validatedAt;
+        if (elapsedTime < (24 * 60 * 60 * 1000)) {
+            return false;
+        }
+    }
+
+    return true;
+}</intertwingle></code></pre>
+
+<p>
+Ok, with this the actual endpoint is done, now for the verification part of the webmention, which is done in an async job:
+</p>
+
+<blockquote>
+If the receiver is going to use the Webmention in some way, (displaying it as a comment on a post, incrementing a "like" counter, notifying the author of a post), then it MUST perform an HTTP GET request on source, following any HTTP redirects (and SHOULD limit the number of redirects it follows) to confirm that it actually mentions the target.
+</blockquote>
+
+<p>
+I haven't really made up my mind how I will use them, but I think I will want to use the webmentions at one point in time, so I should at least superficially try to verify them.
+</p>
+
+<blockquote>
+The receiver SHOULD use per-media-type rules to determine whether the source document mentions the target URL. For example, in an HTML5 document, the receiver should look for &lt;a href="*"&gt;, &lt;img href="*"&gt;, &lt;video src="*"&gt; and other similar links. [..] If the document is plain text, the receiver should look for the URL by searching for the string. Other content types may be handled at the implementer's discretion. The source document MUST have an exact match of the target URL provided in order for it to be considered a valid Webmention.
+</blockquote>
+
+<p>
+Ok, I am cheating here... My go-to library for server-side DOM processing would be JSDOM, which I also use in my <a href="/weeknotes/2023/37/">static site generator</a>, but as I've constrained myself to the standard library I'll do only the simple check on whether the target URL is present anywhere in the source. It's a first iteration after all.
+</p>
+
+<pre><code><intertwingle plugin="syntax-highlighting">
+async function validateMention() {
+    if (!queue.length) {
+        return;
+    }
+
+    let mention = queue.shift();
+
+    let response =
+        await fetch(mention.source)
+            .catch((e) => console.error(e));
+
+    if (response?.ok) {
+        const data = await response.text();
+
+        // only a heuristic - prone to false-postives!
+        let isMentioned = data?.includes(mention.target);
+
+        let existing = received.webmentions
+            .find(isDuplicate(mention));
+
+        if (existing) {
+            existing.validatedAt = Date.now()
+            existing.isMentioned = isMentioned;
+        } else {
+            received.webmentions.push({
+                ...mention,
+                validated: true,
+                mentioned: isMentioned,
+                validatedAt: Date.now()
+            });
+        }
+
+        await writeFile(
+            path.resolve(__dirname, mentionsFile),
+            JSON.stringify(received)
+        );
+    } else if (response?.status === 410) {
+        let existing = received.webmentions
+            .find(isDuplicate(mention));
+
+        if (existing) {
+            existing.validatedAt = Date.now()
+            existing.deleted = true;
+        } else {
+            received.webmentions.push({
+                ...mention,
+                validated: true,
+                deleted: true,
+                validatedAt: Date.now()
+            });
+        }
+
+        await writeFile(
+            path.resolve(__dirname, mentionsFile),
+            JSON.stringify(received)
+        );
+    } else {
+        if (!failures[mention.source]) {
+            failures[mention.source] = 1;
+        } else {
+            failures[mention.source]++;
+        }
+
+        await writeFile(
+            path.resolve(__dirname, failureFile),
+            JSON.stringify(failures)
+        );
+    }
+}
+
+setInterval(() => {
+    try { validateMention() } catch { }
+}, 500);
+</code></pre>
+
+<p>
+I've omitted what little boilerplate there is, e.g. for reading out the command line arguments, the essence clocks in short of 200 lines, which you can look at in their entirety in the <a href="https://github.com/fnh/webmention-receiver">repo on Github</a>.
+</p>
+
+<p>
+I could end here, making this another instance of the cliché "developer writing a blog about a how he developed his blog", but I'd also like to do add some more thoughts (or navel-gazing - I let you be the judge of it) on what it means to put something out on the open web as an independent person (and not on somebody elses platform). 
+</p>
+
+<p>
+In an <a href="https://so1o.xyz/blog/3-body-problem">article</a> that I found <a href="https://brainbaking.com/post/2024/06/may-2024/">via Wouter Groeneveld</a> a fellow webmaster going by the handle of @gar0u bemoans: 
+
+<blockquote>
+<p>IndieWeb is a social club for developers, and apparently, not for me.</p>
+<p>[..]</p>
+<p><b>When some full-stack developers struggle to have WebMention implemented on their blogs, I learn the answer.</b> It’s not child play for the unenlightened.</p>
+</blockquote>
+
+<p>
+And there is undeniable some merit to that observation. Take the code I wrote: quite a chunk of was designed to deal with potential abuse (as already forseen by the wise folks who wrote the spec). I mean, it is just a fact of life, nobody who writes web apps for a living will lose too much sleep about it - but what does it tell the ambitious amateur (in the most positive sense of the word: those who operate a personal site for the love of it), when the implementation of a technology for interpersonal connection concerns itself primarily with hostilities of unknown thirds in mind?
+</p>
+<p>
+And then, via <a href="https://matthiasott.com/">Matthias Otts</a> newsletter series <a href="https://buttondown.email/ownyourweb/archive/issue-14/">Own your web</a>, I found an article by Sebastian Greger, which sheds quite some light on the <a href="https://sebastiangreger.net/2018/05/indieweb-privacy-challenge-webmentions-backfeeds-gdpr/?utm_source=ownyourweb&utm_medium=email&utm_campaign=issue-14">legal implications of web mentions</a>. Well, I recently paid the annual fees for my insurance against lawsuits, but still, I can imagine how such stuff would deter many folks from participation, even if they jumped the technological hurdle. I know it would have detered younger me.
+</p>
+<p>
+A pioneer of the computing field, <a href="https://en.wikipedia.org/wiki/Robert_S._Barton">Bob Barton</a>, once said that <q>System programmers are the high priests of a low cult</q>. Maybe we have climbed one or two little rungs on the long ladder of abstractions, but that pithy statement, made in 1967, still feels quite valid. Staying in that metaphor, I want to end with a more optimistic description of the capabilities of this still very young medium, that we are shaping together: Dave Rupert recently called it <a href="https://daverupert.com/2024/02/a-holy-communion/">A holy communion</a>:
+
+<blockquote>
+<p>You and I are partaking in something magical.[..]</p>
+<p>
+Our thoughts, words, and images transfigured through time and space as ones and zeroes. Circumnavigating the globe in milliseconds. An immaculate relay. A holy exchange.
+</p>
+<p>
+[..] We would do well to preserve its sanctity.
+</p>
+</blockquote>
+
+<p>
+Indeed, therefore &mdash; Ite. Missa est.
+</p>
+
+</article>

@@ -1,0 +1,67 @@
+<script src="/scripts/tau-prolog.full.js"></script>
+
+<section>
+    <h1>Tau Prolog Playground</h1>
+
+    <div>
+        <textarea rows="25" style="width: 100%;" id="knowledgeBase" placeholder="knowlegde(base)."></textarea>
+    </div>
+
+    <input type="text" id="goalInput" placeholder="goal.">
+
+    <button id="cmdQuery">?</button>
+
+    <button id="cmdNext">,</button>
+    <div><output id="currentAnswer"></output></div>
+
+    <script>
+        let session = pl.create();
+
+        let answerQuery = () => {
+            session.answer({
+                success: function (answer) { /* Answer */
+                    console.log({ answer })
+                    console.log(session.format_answer(answer));
+                    currentAnswer.innerHTML = session.format_answer(answer);
+                },
+                error: function (err) {
+                    console.error(err);
+                    /* Uncaught error */
+                },
+                fail: function () {
+                    console.log("fail");
+                    currentAnswer.innerHTML = "";
+                    /* Fail */
+                },
+                limit: function () { console.log("/* Limit exceeded */"); }
+            });
+        }
+
+        cmdNext.addEventListener("click", answerQuery)
+
+        cmdQuery.addEventListener("click", () => {
+            let kb = knowledgeBase.value;
+            let goal = goalInput.value;
+            console.log({ kb, goal });
+
+            session.consult(kb, {
+                success: function () {
+                    // Query
+                    console.log("Successfully consulted knowledge base.")
+                    let answers = null;
+                    session.query(goal, {
+                        success: function (goal) {
+                            answerQuery();
+                        },
+                        error: function (err) {
+
+                            console.error("/* Error parsing goal */");
+                        }
+                    });
+                },
+                error: function (err) { console.error("Error parsing program"); }
+            });
+        });
+    </script>
+
+</section>

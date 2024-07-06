@@ -1,0 +1,72 @@
+<meta name="category" content="100">
+<section>
+<h1>
+18
+</h1>
+
+<p>
+To further riff on the topic of educational codebases, here a collection of projects that either already to some degree have been designed with an educational purpose in mind or are otherwise suitable candidates for study. 
+</p>
+
+<p>
+Starting with a project that is very close to the original definition of "designed to be read and studied": <a href="https://codecatalog.org/
+">Code Catalog</a> is a collection of instructive non-trivial code examples with annotations, that originate from open-source projects, solve general, can be understood with little knowledge of the surrounding context and read in one sitting. What is interesting about this approach is, that the examples are not contrived, but explicitely researched and the educational part being worked out after the fact. I think this model is a very good way to grow the number of educational codebases. 
+</p>
+
+<p>
+Staying in the same order of magnitude (snippets): Collected primarily under the aspect of being short and useful: <a href="https://www.30secondsofcode.org/">30 seconds of code</a> (see also the <a href="https://github.com/Chalarangelo/30-seconds-of-code ">repo</a>) provides a bunch of small code samples which accompanying explanatory blog posts.
+</p>
+
+<p>
+<a href="https://www.norvig.com/">Peter Norvig</a> gifted the world with a lot of interesting code, his <a href="https://github.com/norvig/pytudes">Pytudes</a> are also certainly worthwhile to peruse. Although, as the name suggests, an etude is usually rather intended to be practice (over and over and over), not to be listened to.
+</p>
+
+<p>
+But metaphors carry only so far. When we leave of the territory of well defined small problems, snippets and algorithms and turn to whole classes software system, we can find a few quite outstanding codebases: operating systems, virtual machines, compilers/interpreters, editors, browsers. All might be intimidating. All could fill semesters worth of academic course work and person-centuries of actual implementation time, but let's put that all aside, their fundamental ideas can be understood and a few brave souls have taken on the proof by building implementations that, while maybe not a choice for commercial products, are far away from being mere toys.
+</p>
+
+<p>
+One example that I've briefly encountered in my own studies is <a href="https://pdos.csail.mit.edu/6.828/2023/xv6.html">Xv6</a>, a Unix like educational OS, which is heavily inspired by the <a href="https://en.wikipedia.org/wiki/A_Commentary_on_the_UNIX_Operating_System">Lions' Commentary on UNIX 6th Edition</a> (which probably itself should likely go into a <a href="/articles/2023/06/27/se-great-books-curriculum/">Great books curriculum for software engineering</a>).
+</p>
+<p>
+Then there is <a href="http://www.projectoberon.net/">Project Oberon</a>, by the late Niklaus Wirth. Somebody once called Donald Knuth the <a href="https://yakshav.es/the-patron-saint-of-yakshaves/">The Patron Saint of Yak Shaves</a>, and while that choice has undeniably merit, I think professor Wirth would be my personal candidate for that patronage, to justify my clain, let me quote the design goals of the Oberon system: 
+</p>
+<blockquote>
+Project Oberon is a design for a complete desktop computer system from scratch.  Its simplicity and clarity enables a single person to know and implement the whole system, while still providing enough power to make it useful and usable in a production environment.
+</blockquote>
+
+<p>
+Then a more recent project is the <a href="https://jacobin.org/">Jacobin JVM</a> implementation. 
+</p>
+
+<blockquote>
+<p>
+Jacobin is an implementation of the JVM specification for Java 17. It is written entirely in Go with no dependencies.
+</p>
+<p>
+The goal is to provide a more-than-minimal implementation of the JVM that can run most class files and JARs and deliver the same results as the OpenJDK-based JVMs (that is, the majority of JVM implementations today). A paramount consideration in the design and implementation of Jacobin is the codebase: making it cohesive and containing clear code. The cohesiveness, extensive commenting, and large test suite enable professionals who want to know more about how the JVM works to find the information quickly and in an easily accessible setting. Additional information on the Jacobin wiki provides more background and insight. Because Jacobin is strictly a JVM, its code is tightly focused on Java program execution.
+</p>
+</blockquote>
+<p>
+I (like a million or so other people) am getting payed for writing Java, but to me (like the vast majority of the aforementioned other people) the JVM is still mostly terra incognita. This project therefore makes a worthwhile subject of study for a very large mainstream group of software engineers.
+</p>
+
+<p>
+Speaking of VMs. When my Java-only colleagues get too condecending about JavaScript, I always snarkily reply that client-side JS delivered what the JVM only promised: write once, run anywhere, and (not only) therefore web browsers are an interesting topic. They combine many aspects of computer science (networking, computer graphics, layout algorithims, security, parsing & interpreting of multiple programming languages) and are so ubiquitous, that they ought to be better understood. Pavel Panchekha and Chris Harrelson have published <a href="https://browser.engineering/">Web Browser Engineering</a>, an online book which explains how a basic but complete web browser in a couple thousand lines of Python.
+</p>
+
+<p>
+Salvatore Sanfilippo, best known as the creator of Redis, has written <a href="https://github.com/antirez/kilo">kilo</a>, a text editor in ~1000 SLOC of C, without any dependencies. <a href="https://viewsourcecode.org">Paige Ruten</a> has turned that code (with slight adaptions) into a 184 step tutorial / walk-through / booklet called <a href="https://viewsourcecode.org/snaptoken/kilo/index.html">Build Your Own Text Editor</a>.
+</p>
+
+<p>
+Lastly, <a href="https://maryrosecook.com/">Mary Rose Cook</a> has reimplemented a core set of git in JavaScript and published <a href="http://gitlet.maryrosecook.com/docs/gitlet.html">Gitlet</a>, which contains the code, an heavily annotade version, an 6000 word essay about it, and then some.
+</p>
+
+<p>
+I have some more candidates in my bookmarks, but this sample of codebases suitable for educational purposes at least is an indicator that the format is more than just a nice idea that doesn't scale beyond a small amount of code.
+</p>
+
+<time datetime="2024-07-06">Saturday, the 6th of July 2024</time>
+
+</section>

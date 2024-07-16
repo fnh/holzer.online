@@ -1,0 +1,39 @@
+<section>
+<h1>~</h1>
+
+<p>
+    Press Ctrl+K to summon a command palette.
+</p>
+
+<dialog id="commandBar" style="width: 50vw;">
+    <h2>Command bar</h2>
+
+    <input id="commandPrompt" style="width: 100%" type="text" placeholder="&gt; Type command">
+</dialog>
+
+<script>
+    addEventListener("keydown", (event) => {
+        if (event.ctrlKey && event.key === "k") {
+            event.preventDefault();
+            if (commandBar.open) {
+                commandBar.close();
+            } else {
+                commandBar.show();
+            }
+        }
+    })        
+
+    commandPrompt.addEventListener("keydown", (event) => {
+        if (event.key == "Enter") {
+            console.log(commandPrompt.value);
+            let res = eval(commandPrompt.value);
+            commandResult.innerHTML = res;
+            commandPrompt.value = "";
+            commandBar.close();
+        }
+    })
+</script>
+
+<output id="commandResult"></output>
+
+</section>

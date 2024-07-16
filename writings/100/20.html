@@ -1,0 +1,132 @@
+<meta name="category" content="100">
+<article>
+<h1>
+20
+</h1>
+
+<p>
+I'm just jotting down an implementation of chapter 1 of "The Ray Tracer Challenge", literate style (open the dev tools to see the logs). The pseudocode maps quite straight forward to JS. 
+</p>
+
+<script>
+
+function tuple(array) {
+    return array;
+}
+
+function point(array) {
+    return tuple([...array, 1])
+}
+
+function vector(array) {
+    return tuple([...array, 0])
+}
+
+function addTuple(t1, t2) {
+    if (t1.length != t2.length) {
+        throw Error("Cannot add tuples with different number of components");
+    }
+
+    let result = [];
+    for (let i = 0; i < t1.length; i++) {
+        result.push(t1[i] + t2[i]);
+    }
+
+    return result;
+}
+
+function subtractTuple(t1, t2) {
+    if (t1.length != t2.length) {
+        throw Error("Cannot subtract tuples with different number of components");
+    }
+
+    let result = [];
+    for (let i = 0; i < t1.length; i++) {
+        result.push(t1[i] - t2[i]);
+    }
+
+    return result;
+}
+
+function negate(tuple) {
+    let result = [];
+    for (let i = 0; i < tuple.length; i++) {
+        result.push(-tuple[i]);
+    }
+
+    return result;
+}
+
+console.log(negate(tuple([1, -2, 3, -4])));
+
+function multiplyWithScalar(tuple, scalar) {
+    let result = [];
+    for (let i = 0; i < tuple.length; i++) {
+        result.push(scalar * tuple[i]);
+    }
+
+    return result;
+}
+
+function magnitude(tuple) {
+    let sum = 0;
+    for (let i = 0; i < tuple.length; i++) {
+        sum += (tuple[i] ** 2);
+    }
+
+    return Math.sqrt(sum);
+}
+
+console.log(magnitude(tuple([-1, 2, -3])), Math.sqrt(14));
+
+function normalize(vector) {
+    let result = [];
+
+    for (let i = 0; i < vector.length; i++) {
+        result.push(vector[i] / magnitude(vector));
+    }
+
+    return result;
+}
+
+console.log(normalize(vector([1,2,3])))
+
+function dotProduct(v1, v2) {
+    if (v1.length != v2.length) {
+        throw Error("different number of components");
+    }
+
+    let result = 0;
+    for (let i = 0; i < v1.length; i++) {
+        result += v1[i] * v2[i];
+    }
+
+    return result;
+
+}
+
+console.log(dotProduct(vector([1,2,3]), vector([2,3,4])))
+
+function crossProduct(a, b) {
+    return vector([
+        (a[1] * b[2]) - (a[2] * b[1]),
+        (a[2] * b[0]) - (a[0] * b[2]),
+        (a[0] * b[1]) - (a[1] * b[0]) 
+    ]);
+}
+
+console.log(crossProduct(
+    vector([1, 2, 3]),
+    vector([2, 3, 4])
+))
+
+</script>
+
+<p>
+So, let's stop and reflect. The very direct translation from the pseudocode feels rather ugly. I think the whole model lends itself a some more object-orientated style. Next time. 
+</p>
+
+<time datetime="2024-07-16">Tuesday, the 16th of July 2024</time>
+
+
+</article>

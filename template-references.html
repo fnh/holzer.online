@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Fabian's public notepad</title>
+    <meta name="template" content="references">
+
+    <meta charset="utf-8">
+
+    <meta name="author" content="Fabian Holzer">
+    <meta name="description"
+        content="Thoughts on topics like software engineering, web development, blogging and the web in general">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="template" content="default">
+
+    <link rel="icon" href="/favicon.svg" type="image/svg">
+
+    <link rel="canonical" href="https://holzer.online/">
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <link rel="alternate" type="application/rss+xml" href="https://holzer.online/feed.xml">
+
+     <link rel="webmention" href="https://holzer.online/api/webmention">
+
+</head>
+
+<intertwingle plugin="create-title"></intertwingle>
+
+<body>
+
+
+    <header>
+        <intertwingle plugin="include" file="main-navigation.html"></intertwingle>
+    </header>
+        
+    <main id="main">
+
+    <article>
+        <intertwingle plugin="main-content"></intertwingle>
+    
+        <div id="backlinks"></div>
+    </article>
+        <intertwingle plugin="backlinks"  category="references,articles,weeknotes"></intertwingle>
+    </main>
+
+</body>
+
+</html>

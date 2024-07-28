@@ -1,0 +1,88 @@
+<meta name=category content=100>
+
+<h1>
+28
+</h1>
+
+<p>
+The earliest attempt of creating a pattern language for writing websites that I have found was published in the <a href="/references/plop2/">proceedings of the second PLoP conference</a>. This volume contains "A Pattern Language for an Essay-Based Web Site" by Robert Orenstein, which is a polished version of his <a href="https://web.archive.org/web/19961227102428/http://www.anamorph.com/docs/patterns/default.html">An HTML 2.0 Pattern Language</a>.
+</p>
+
+<p>
+To get a feeling of how early 1995 in terms of the web was, just think about which technologies were <strong>not</strong> around then: Javascript had not yet landed in Netscape. Neither Chrome, Firefox, Edge nor Safari existed. What became known in retrospecive as the first <a href="https://en.wikipedia.org/wiki/Browser_wars">Browser wars</a> had only just begun with the release of IE 1.0. It would take over ten years from there until the first version of a little library called jQuery. Not to speak of the cambric explosion of JavaScript that was fueled through the appearance of node.js to the web development scene in 2009. The CSS 1.0 specification was not finished until the end of 1996, and only in 1999 one web browser achieved a full implementation of it.
+</p>
+
+<p>
+The author critically remarked in the introduction of the web version: <q>I'd like for this to be a full pattern language, but that's a long way from happening.</q>. However, I find it worthwhile to revisit what aspects of creating on and for this young medium could be generalized into patterns from the eyes of an early participant. I'll try to briefly go over the 29 patterns that were published in the PLoP2 catalog. 
+</p>
+
+<p>
+The first patterns, <i>Natural Text Flow</i> (and <i>Natural Text Hyperlinks</i>), adress very fundamental aspects of writing. Orenstein states as problem that many documents "call attention to the fact that they are located on the Web" and prescribes as a solution to avoid it as much as possible. As the web has long lost its novelty character and to the contrary is now so ubiquitous, that not being somehow on the web is the uncommon thing of today, that this style of writing is by and large gone. More common, even though the affordances of links that are naturally embedded into writing can nowadays be considered widely understood, one can occasionally spot the "Click <u>here</u> to read about..." style of linking, so that <i>Natural Text Hyperlinks</i> still is worth mentioning.
+</p>
+
+<p>
+Next up, the <i>Natural Text Directories</i> could be interpreted as a description of a breadcrumb navigation. What stands out much more than the proposed solution is the problem description that <q>Some mechanism must be provided to [..] maneuver trough your site's document set</q> which is remains one of the most fundamental design questions any website that grows beyond a certain small size needs to adress.
+</p>
+
+<p>
+As the title gives away, the pattern language was not about just anything that could be put on the web, but on a particular type of content, that has its roots in <a href="http://web.archive.org/web/19970104044631/http://www.research.apple.com/research/proj/learning_concepts/evolution_active_essay/active_essay.html">ideas of Alan Kay and Ted Kaehler</a> reaching back to pre-web hypertext systems like HyperCard and Smalltalk (which would be a rabbit hole of its own to explore). As blogs are the most popular genre of personal websites today, we have to keep in the back of our mind that the title also stems from a time where the term weblog (and its later shortening to blog) had not even been coined. But then again, the last few years have popularized the form of <a href="/articles/on-digital-gardening/">Digital Gardens</a>, which in a way are a back-to-the-roots movement very similar to the kind of essays that Orensteins languages discusses.
+</p>
+
+<p>
+The second section of patterns is mostly dedicated to the structural aspects of the content. With <i>Consistent Headers and Footers</i> and <i>Document Format Consistency</i> quietly underpin the majority of software that is powering websites today, they might come as templates for static site generators or themes for popular content management systems like WordPress, but that speaks for the quality of the observed problem. 
+</p>
+
+<p>
+Then <i>Section-Based Essays</i> reminds us that a bit of structure goes a long way in long text, <i>Short, Single-Page Essays</i> tells that the structure can be mapped to webpages, which then in turn necessitate <i>Next and Previous Reference Links</i> as a connecting element, <i>Document Content Listing</i> is a slightly complicated synonym for a table of contents, <i>Reference Section</i> discusses the merits of taking over an structural element of pre-hypertext publishing.
+</p>
+
+<p>
+<i>Introductory Section</i> and <i>Introductory Picture</i> are common practices on many sites. <i>Activity Toward the Top</i> - is an instance of the design advice to keep imporant things "above the fold" (to use a metaphor from the print era).
+</p>
+
+<p>
+<i>Low-Depth Document Trees</i> is an outlier insofar as it does not really provide a problem statement, nor much discussion around it and appeals to established findings. It does not seem unreasonable per se, but categorization and information architecture would deserve a 
+</p>
+
+<p>
+<i>Temporal Document Versioning</i> could be considered a corollary Sir Tims dictum that <a href="https://www.w3.org/Provider/Style/URI">Cool URIs don't change</a>. But as it predates the latter by three years, it rather is an early variant of that principle.
+</p>
+
+<p>
+With <i>Exposable Guts</i> a very important characteristic of the early web is given a quite graphical name. Some month ago Garry Ing published an essay "<a href="https://viewsource.info/">a view source web</a>", which works out how this capability influenced the copy and remix mentality that fueled and shaped the personal websites of the first decade of the web. The server-side counterpart is found in <i>Downloadable CGIs</i>. Today you'd rather talk about open sourcing your code (which happens to be one of the <a href="https://indieweb.org/principles#Key_Principles">core principles of the indieweb</a>). The essence of these patterns is the innate possibility to get fluent in the medium using means provided by the medium, which enables observation, inspection and constructing. A Colophon page might be another recurring solution to the same underlying problem.
+</p>
+
+<p>
+<i>Author Biography</i> and <i>Reachable Author</i> would in a personal website typically correspond with the About page and the Contact page. But I suppose this makes sense with websites that are the effort of a group of people. Anyway, <i>Relevant Dates</i>, which have in part been abandoned to please the SEO demiurg, are still an worthwhile consideration.
+</p>
+
+<p>
+<i>Immediate Document Discussion</i> anticipates what would be the lifeblood of the first wave of blogging: the comment section. Even though many factors contributed to sucking the oxigen out of the room, and pushing public discussion by and large into a small number of central platforms: the need for public discourse remains. Contemporary attemps of solving it (like the many facets of the fediverse) would in my eyes deserve some attention again.
+</p>
+
+<p>
+<i>Worksheet Documents</i> describe a way to publish longer content incrementally, but I'd be challenged to bring up good concrete example of this in the wild. Did the problem turn out to be not such a pressing one after all, or have better recurring solutions evolved? 
+</p>
+
+<p>
+<i>New Document Notification</i> describes newsletters. Four years after the publication of the pattern language as another recurring solution for subscribing to updates of a website the RSS feed format was specified. Interestingly, <i>Changed Document Notification</i> describes a problem that remains not very well solved to this day (for a deeper discussion of the why and possible how, confer Chris Krychos take on why <a href="https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/">Feeds are Not Fit for Gardening</a>)
+</p>
+
+<p>
+Dial-up internet connections are a thing of the past, still we can draw a lesson from the section "Slow Modem Speed Patterns". You would not necessarily need to dig out an old modem to practice <i>14.4 Kbps Testing</i>. But simulating throttled connections are a feature of the dev tools in the browser today. Also the optimization of images is still a thing, although, unless you aim for a 90es aesthetic, you would likely not use <i>Interlaced Images</i> or <i>Low-Bit-Depth Images</i>. Albeit, using <i>Sparse Images</i> may indeed still be a conscious design choice today.
+</p>
+
+<p>
+<i>Link-Type Distinction</i> is far from being a universally practiced pattern, but you can find instances of it (prominent example: <a href="https://en.wikipedia.org/w/index.php?title=Help:External_link_icons">Wikipedia</a>). I did it for a while to dial down internal over external links. 
+</p>
+
+<p>
+In an age of being permanently online one could brush off <i>Home Versions</i> as an echo of an age long gone by. Another pattern author, Mark Irons, described a very similar pattern as <a href="http://www.rdrop.com/~half/Creations/Writings/Web.patterns/downloadable.weblet.html"><i>Downloadable Weblet</i></a>. I think the problem today is less that the requester temporarily doesn't have access, but that a server permanently goes down: <a href="/articles/2023/06/15/preserving-the-web/">Preserving the web is an unsolved problem</a>. 
+</p>
+
+<p>
+The paper is a interesting document of its time. While most of the chosen pattern names didn't really stick, many of the problems and forces identified remain applicable even with nearly three decades of technological evolution having passed. 
+</p>
+
+
+<time datetime=2024-07-28>Sunday, the 28th of June 2024</time>

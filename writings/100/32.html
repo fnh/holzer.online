@@ -1,0 +1,23 @@
+<meta name="category" content="100">
+<h1>
+<intertwingle plugin="tex-to-mathml">2 ^ 5</intertwingle>
+</h1>
+
+<p>
+I've recently complained about <a href="/writings/100/26.html">the friction that comes with the setup of contemporary software projects</a>, so I also want to notice when the needle is moving into the right direction: Some really promising features have recently landed in the current v22 stream of node.js.
+</p>
+
+<p>
+First: a native <a href="https://nodejs.org/en/blog/release/v22.5.0">node:sqlite</a> module, which looks really promising. There are several sqlite binding available for node already, but having it directly on the platform eases the choice: always go with the standard lib.
+</p>
+
+<p>
+Secondly: I always say that, just as a marine is a riffle man first, every typescript programmer is a javascript programmer first, so I'm happy that there will be support for using typescript without a separate compile step, by <a href="https://github.com/nodejs/node/pull/53725">by striping away the ts-specific annotations</a> at runtime. 
+</p>
+
+<p>
+Now, it would be great to have a boilerplate project which demostrates what can already be done without thirdparty dependecies. Maybe another item for the to-make list...
+</p>
+
+
+<time datetime="2024-08-04">Sunday, the 4th of August 2024</time>

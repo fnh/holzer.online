@@ -1,0 +1,35 @@
+<meta name="category" content="100">
+<section>
+<h1>
+37
+</h1>
+
+<p>
+What makes command-line programs composable?
+</p>
+
+<p>
+Suppose I have a server log and find out how many different IP adresses requested a specific file. A one-liner (here broken into multiple lines solely for layouting reasons) on the shell:
+</p>
+
+<pre style="line-height: 1.25rem;"><code>grep some-file.html /var/log/nginx/access.log \ 
+ | awk '{print $1}' \ 
+ | sort \ 
+ | uniq \
+ | wc -l
+</pre></code>
+<p>
+A lot of what makes this work is a set of ideas which permeate the ecosystem of unix-based systems, that have become known as the <a href="https://www.catb.org/~esr/writings/taoup/html/ch01s06.html">Unix philosphy</a>.
+</p>
+
+<p>
+One core idea: programs specialize. While there usually is more than one way to get something done, and specialization still leaves a lot of wiggle room, by and large each program is a utility to solve a well understood problem. In that small example grep filters text streams, sort orders them, uniq deduplicates them, wc counts words. I've skipped awk in that list, because it is a proper scripting language in its own right and as such could be used to do all the work in that example by its own, which would defeat the point of demostrating the composition of programs to achieve a goal which none of the orginal utilities specifically set out to solve. It is debatable when "doing one thing", stops being a single thing - confer Dan Luus article on the <a href="https://danluu.com/cli-complexity/">growth of command line options</a> over the years in the coreutils - but the overall priciple stands: the problem is achieved by composing pre-existing programs together, with the humble pipe symbol acting as glue, connecting the output of one program to input of another.
+</p>
+
+<p>
+On the other hand: if the server would expose an GUI for the admin only, and nobody would have thought of anticipating the question how many different IP adresses requested a certain file in the last hours, we'd be out of luck. GUIs radically restrict the size of the vocabulary on the interface, which is arguably one of the cornerstones of its success as a paradigm. But this comes at a high conceptual cost: thoughts that were not thought before usually cannot be articulated, While this does not concern beginner and intermediate user of a system, it is bound to become a trap to anybody trying to do expert level work. I'd like to ask: is that a technical necessity, or an rather issue of culture and software design philosophy? Could you have your cake and eat it, if you'd deliberately design a graphical interface with composability and extension in mind, and if so: how would that look like?
+</p>
+
+<time datetime="2024-08-11 16:00">Sunday, the 11th of August 2024</time>
+
+</section>

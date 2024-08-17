@@ -3,19 +3,18 @@
 <section>
 <div>
 <p>Hello there!</p>
+
 <p>
-Welcome to my little corner of the web.
-</p>
-<p>
-My name is Fabian Holzer. I am a software engineer by trade, and programming was a hobby of mine for many years before it became my profession. Apart from that, I've always loved to read widely and avidly and pursue ideas that tickle my curiosity.
+Welcome to my little corner of the web. My name is Fabian Holzer. I am a software engineer by trade, and programming was a hobby of mine for many years before it became my profession. Apart from that, I've always loved to read widely and avidly and pursue ideas that tickle my curiosity.
 </p>
 
 <p>
-Writing is essential to my thinking process. I've kept notes on paper and in a private wiki for a long time. I decided to put a <a href="/articles/">selection of my thoughts</a> on this site. The <a href="/articles/topic/">topics</a> I write about include <a href="/articles/topic/software-engineering/">software engineering</a>, <a href="/articles/topic/web-development/">web development</a>, <a href="/articles/topic/blogging/">blogging and the web in general</a>, but are <a href="/articles/topic/misc/">not limited to that</a>.
+The <a href="/articles/topic/">topics</a> I write about include <a href="/articles/topic/software-engineering/">software engineering</a>, <a href="/articles/topic/web-development/">web development</a>, <a href="/articles/topic/blogging/">blogging and the web in general</a>, but are <a href="/articles/topic/misc/">not limited to that</a>. 
+Not sure where to start? Maybe you'd like to visit a <a href="javascript:visitRandomPage();">random page</a>?
 </p>
 
 <p>
-If you are interested in what I'm currently up to, I also have a <a href="/now/">Now Page</a>. And consider yourself invited to <a href="/contact.html">contact me</a>, if you want to discuss anything I wrote about.
+Feel free to <a href="/contact.html">contact me</a>, if you want to discuss anything I wrote about.
 </p>
 
 <p>
@@ -43,6 +42,8 @@ Last updated <span id="lastUpdateOutlet"></span>:
 
 </section>
 
+<intertwingle plugin="pages-as-json" category="articles,weeknotes,100"></intertwingle>
+
 <script>
     const last = new Date(lastUpdatedAt.getAttribute('datetime'));
     const now = new Date();
@@ -55,4 +56,12 @@ Last updated <span id="lastUpdateOutlet"></span>:
     } else {
         lastUpdateOutlet.innerText = `${Math.floor(hours / 24)} days ago`;
     }
+
+function visitRandomPage() {
+    let i = Math.floor(
+        Math.random() * pageList.length
+    );
+
+    window.location.href = pageList[i];
+}
 </script>

@@ -8,12 +8,6 @@
     --padding-left: 2rem;
 }
 
-@media (max-width: 480px) {
-    :root {
-        --padding-left: 0rem;
-    }
-}
-
 @media (prefers-color-scheme: dark) {
 
     :root {
@@ -35,6 +29,13 @@
         color: var(--visited-link)
     }
 }
+
+@media (max-width: 480px) {
+    :root {
+        --padding-left: 0rem;
+    }
+}
+
 
 nav ul {
     list-style: none;
@@ -92,7 +93,7 @@ ul.intertwingle-toc-top {
 body {
     background-color: var(--article-bg-color);
     color: var(--main-text-color);
-    font-family: ui-serif, Palatino, Georgia, "DejaVu Sans", serif;
+    font-family: Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif; 
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -218,6 +219,32 @@ main article aside {
 
 code pre {
     border: 1px solid var(--main-border-color);
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline dotted;
+}
+
+nav a:focus {
+    text-decoration: underline;
+}
+
+article a, section a {
+    text-decoration: underline dotted;
+}
+
+
+article a:hover, section a:hover {
+    text-decoration: underline;
+}
+
+
+article a:focus, section a:focus {
+    text-decoration: underline double;
 }
 
 article h1 {

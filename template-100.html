@@ -35,14 +35,16 @@
     </header>
 
     <main id="main">
-        <nav style="width: 100%; display: grid; grid-template-columns: 1fr 1fr 1fr; justify-items: center;">
-            <div>
+        <nav style="display: flex;
+  justify-content: space-between;
+  margin: 1rem 0 1rem calc(1rem + var(--padding-left));
+  width: 45rem;
+  align-self: flex-start;">
+            <div style="flex-grow: 1;">
                 <intertwingle plugin="previous-page" 
                     link-text="&lt;- Previous">
                 </intertwingle>
             </div>
-
-            <div style="font-size: 1rem;"></div>
 
             <div>
                 <intertwingle plugin="next-page" 

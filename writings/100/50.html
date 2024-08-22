@@ -1,0 +1,102 @@
+<meta name="category" content="100">
+<section>
+<h1>
+50
+</h1>
+
+<p>
+A little work log for today: I replaced the <a href="/writings/100/42.html">client-side random page</a> script with a little server-side endpoint. I just dump it here for reference:
+</p>
+
+<pre><code><intertwingle plugin="syntax-highlighting">import http from "http";
+import { readFile } from "node:fs/promises";
+import path from "path";
+import { fileURLToPath } from 'url';
+
+let __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+let PORT = 29624;
+
+let commandLineArgs = process.argv.slice(2);
+
+let [
+    sitemapFile, baseUrl
+] = commandLineArgs;
+
+if (!sitemapFile) {
+    console.error("no sitemap file provided");
+    process.exit(1);
+}
+
+if (!baseUrl) {
+    console.error("no baseUrl provided");
+    process.exit(1);
+}
+
+const server = http.createServer((request, response) => {
+    let sitemap = readFile(
+        path.resolve(__dirname, sitemapFile),
+        { encoding: "utf-8" }
+    );
+
+    sitemap.then((sitemapContent => {
+        let urls = JSON.parse(sitemapContent);
+
+        let randomIndex = Math.floor(
+            Math.random() * urls.length
+        );
+
+        console.log({
+            Location: baseUrl + urls[randomIndex]
+        })
+
+        response.writeHead(301, {
+            Location: baseUrl + urls[randomIndex]
+        });
+
+        response.end();
+    })).catch(() => {
+        response.writeHead(301, {
+            Location: baseUrl
+        });
+
+        response.end();
+    });
+});
+
+
+console.log("starting random-redirecter on port " + PORT);
+server.listen(PORT);
+</intertwingle></code></pre>
+
+<p>
+I use the nginx front proxy also to ensure that the endpoint to set the cache headers:
+</p>
+
+<pre><code>location /random-page/ {
+    proxy_pass http://127.0.0.1:29624/;
+    proxy_buffering off;
+    proxy_set_header Host                   https://$host;
+    proxy_set_header X-Real-IP              $remote_addr;
+    proxy_set_header X-Forwarded-For        $proxy_add_x_forwarded_for;
+            
+        
+    add_header Last-Modified $date_gmt;
+    add_header Cache-Control 'no-store, no-cache';
+    if_modified_since off;
+    expires off;
+    etag off;
+}
+</code></pre>
+
+<p>
+I also enhanced the intertwingle plugin to generate the JSON file (called a sitemap in the code, but it is only a subset of all URLs as array, if I ever bother to add a sitemap.xml I might want to use that also as a potential input file format for the endpoint). Also I should probably optimize it and cache the file for some time, to not read it with every request. But: one step at a time. Good enough for now.
+</p>
+
+<p>
+So: Do you feel lucky, punk? Be my guest: <a href="/random-page/" rel="nofollow">&#127922;</a>
+</p>
+
+<time datetime="2024-08-22 23:50">Thursday, the 22nd of August 2024</time>
+
+</section>

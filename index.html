@@ -10,7 +10,7 @@ Welcome to my little corner of the web. My name is Fabian Holzer. I am a softwar
 
 <p>
 The <a href="/articles/topic/">topics</a> I write about include <a href="/articles/topic/software-engineering/">software engineering</a>, <a href="/articles/topic/web-development/">web development</a>, <a href="/articles/topic/blogging/">blogging and the web in general</a>, but are <a href="/articles/topic/misc/">not limited to that</a>. 
-Not sure where to start? Maybe you'd like to visit a <a href="javascript:visitRandomPage();">random page</a>?
+Not sure where to start? Maybe you'd like to visit a <a href="/random-page/" rel="nofollow">random page</a>?
 </p>
 
 <p>
@@ -42,7 +42,7 @@ Last updated <span id="lastUpdateOutlet"></span>:
 
 </section>
 
-<intertwingle plugin="pages-as-json" category="articles,weeknotes,100"></intertwingle>
+<intertwingle plugin="pages-as-json" filename="pages.json" category="articles,weeknotes,100"></intertwingle>
 
 <script>
     const last = new Date(lastUpdatedAt.getAttribute('datetime'));

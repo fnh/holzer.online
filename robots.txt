@@ -1,6 +1,9 @@
 User-agent: *
 Disallow: /wip/*
 
+User-agent: *
+Disallow: /random-page/
+
 User-agent: CCBot
 Disallow: /
 

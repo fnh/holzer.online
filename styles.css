@@ -93,7 +93,7 @@ ul.intertwingle-toc-top {
 body {
     background-color: var(--article-bg-color);
     color: var(--main-text-color);
-    font-family: Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif; 
+    font-family: Didot, 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif; 
     margin: 0;
     display: flex;
     flex-direction: column;

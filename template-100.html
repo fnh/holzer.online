@@ -35,22 +35,24 @@
     </header>
 
     <main id="main">
-        <nav style="display: flex;
-  justify-content: space-between;
-  margin: 1rem 0 1rem calc(1rem + var(--padding-left));
-  width: 45rem;
-  align-self: flex-start;">
-            <div style="flex-grow: 1;">
+        <nav style="
+        display: flex;
+        justify-content: space-between;
+        margin: 1rem 0 1rem calc(1rem + var(--padding-left));
+        width: calc(min(90%, 45rem));
+        align-self: flex-start;"
+    >
+            <span>
                 <intertwingle plugin="previous-page" 
                     link-text="&lt;- Previous">
                 </intertwingle>
-            </div>
+            </span>
 
-            <div>
+            <span>
                 <intertwingle plugin="next-page" 
                     link-text="Next -&gt;">
                 </intertwingle>
-            </div>
+            </span>
         </nav>
 
         <section>

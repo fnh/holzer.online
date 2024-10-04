@@ -1,0 +1,29 @@
+<meta name="category" content="100">
+<section>
+<h1>
+63
+</h1>
+
+<p>
+Caution: rather murky thinking ahead.
+</p>
+
+<p>
+I am wondering why transformations from one notation into another so often only works one way. 
+</p>
+
+<p>
+Consider any WYSIWYG editor. You write your text and mark it up via the UI. You see something the resembles the outcome for consumption quite closely, while under the hood a less palatable, more formal representation was created. This format often is still readable, understandable and even manipulatable by humans, but not primarily designed for human usage: think YAML, XML, JSON, HTML, S-Expressions...
+</p>
+
+<p>
+Now, if you have a situation where you are mostly in one format, but would like to drop interchangeably into a different representation for a specific use case, this is likely not provided by the affordances of the UI. Take for example a CI-Pipeline, which is expressed in YAML, but in its essence is a graph structure. You'll see the graph as derivative artifact, but you usually cannot drop into a graph editor, reorder the dependecies and maybe and drilldown into each node (representing a jobs) to specify the details, and have the UI properly adjust the YAML. But this one-way direction is not rooted in a fundamental limitation or a one-way nature of the problem itself, but by a "good enough" design mentality.
+</p>
+
+<p>
+You would not need to search very long to come up with more examples of transformations that could be two-way, but the available software does not cater to it, which is a pity. The interesting question from my software engineering perspective: is this merely a matter of satfisficing, or is there maybe an order of magnitude of increase in complexity, if you'd try to build a UI that would attempt such a two-way binding of notation/representation?
+</p>
+
+<time datetime="2024-10-04 23:15">Friday, the 4th of October 2024</time>
+
+</section>

@@ -1,0 +1,30 @@
+<section>
+    <table id="statistics" is="sort-able">
+        <tr>
+            <td>Path</td>
+            <td>Hits</td>
+        </tr>
+    </table>
+</section>
+
+<script src="/scripts/sort-able.js"></script>
+
+<script type="module">
+    let response = await fetch("/hits.json");
+    let stats = await response.json();
+
+    console.log(stats);
+    let { hitCount } = stats;
+    console.log("hitCount", hitCount);
+
+    Object.entries(hitCount).forEach(([path, hits]) => {
+        let row = document.createElement("tr");
+        let pathCell = document.createElement("td");
+        pathCell.innerHTML = path;
+        let hitsCell = document.createElement("td");
+        hitsCell.innerHTML = hits.count;
+        row.appendChild(pathCell);
+        row.appendChild(hitsCell);
+        statistics.appendChild(row);
+    });
+</script>

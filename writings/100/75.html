@@ -1,0 +1,11 @@
+<meta name="category" content="100">
+
+<h1>
+75
+</h1>
+
+<p>
+One probably would best completely ignore all metrics and analytics. Still, I'd really like to have a rough idea how many peoples come across what I write. So, I've hacked together an enormously simple hit counter. I define a hit as a request against that API from an IP that is not ignored (my own in this case...) or where the user agent fails against a simple bot check provided by a thirdparty package. Repeated hits count again after one hour. Repetition is checked by hashing IP and user agent together with a timestamp. State is flushed once a minute if necessary (throwing away also all hashes that are older than an hour). I think analytics don't get much more anonymous than that. Probably shouting out into the void anyway, although the feed has at least 40 subscribers currently (as reported by the user-agent string of the aggregators which tell you their count). Should probably write that up and also put it on github sometime.
+</p>
+
+<time datetime="2024-10-11 20:15">Friday, the 11th of October 2024</time>

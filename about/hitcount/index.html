@@ -1,8 +1,8 @@
 <section>
-    <table id="statistics" is="sort-able">
+    <table id="statistics" is="sort-able" style="width: 30rem;">
         <tr>
-            <td>Path</td>
-            <td>Hits</td>
+            <th>Path</th>
+            <th>Hits</th>
         </tr>
     </table>
 </section>
@@ -13,18 +13,22 @@
     let response = await fetch("/hits.json");
     let stats = await response.json();
 
-    console.log(stats);
     let { hitCount } = stats;
-    console.log("hitCount", hitCount);
 
     Object.entries(hitCount).forEach(([path, hits]) => {
         let row = document.createElement("tr");
         let pathCell = document.createElement("td");
-        pathCell.innerHTML = path;
+        let anchor = document.createElement("a");
+        anchor.href = path;
+        anchor.innerHTML = path;
+        pathCell.appendChild(anchor);
         let hitsCell = document.createElement("td");
         hitsCell.innerHTML = hits.count;
         row.appendChild(pathCell);
         row.appendChild(hitsCell);
-        statistics.appendChild(row);
+        statistics.tBodies.item(0).appendChild(row);
     });
+
+    statistics.sortBy(1, "asc");
+    console.log(statistics);
 </script>

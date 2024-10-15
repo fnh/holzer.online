@@ -1,0 +1,48 @@
+<meta name="category" content="100">
+<h1>
+77
+</h1>
+
+<p>
+What good is it to <a href="/weeknotes/2023/37/">write a custom static site generator</a> when you don't move closer to the <a href="https://rakhim.org/honestly-undefined/19/">static gen basin</a> by publishing articles on elaborate blog setups? 
+</p>
+
+<p>
+I have a code walkthrough lingering (or languishing?) in the limbo of my drafts directoy. But before I get knee deep into the nitty-gritty (and then don't finish anything), let me try a more informal approach. 
+</p>
+
+<p>
+To answer an important question first: As there are hundreds, if not thousand of SSGs available, what is wrong with them that I felt the need to make my own? Or is there maybe just something wrong with me? 
+</p>
+
+<p>
+For one, I come with a lot of preconceived notions on software development, and also I enjoy programming quite a bit, so it simply boils down to a déformation professionnelle. It would likely have been the more productive way to just pick a big-name one (Jekyll,  Hugo, what) and try to map what I had, have, want to have to its mental model. But then again, why not make something that maps 1:1 to my personal mental model? It also has the nice side effect of achieving more clarity on your thinking and tacit knowledge on the subject at hand, as few things make your ideas more clear (or the lack of mental clarity more apparent...) than teaching a computer to automate certain aspects of it.
+</p>
+
+<p>
+As an aside, part of my motivation also stems from the fact that I entertain some contrarian notions when it comes to several popular file formats. I hate YAML with a fervor. I won't go into a rant, as other people elaborated on <a href="https://noyaml.com/">a bunch of good reasons against this abomination of a format</a> in an admirably patient way...
+</p>
+
+<p>
+On Markdown I am somewhat more  indifferent. I don't find it that lightweight a format. Sure it is terser than HTML, but I don't mind a little verbosity as much as the little strains on my memory that comes with shorthand notation. I always have to do mental mapping. Is something between one asterisk now italics or bold? Is the order []() or ()[]? Don't get me started on tabular data. And it is a poster child for a <a href="https://xkcd.com/927/">proliferating standards</a>.
+</p>
+
+<p>
+If find HTML to be a quite decent markup language. Of course, when I write, I want to see as little boilerplate as possible. The bread and butter of basically every SSG in existence is to factor out common parts of site like header, footer and navigation into a single place, so that they are easily changable in a single location (the good old DRY principle).
+</p>
+
+<p>
+Also, most SSGs come with some form of templating language, that most often turns out to be a Turing tarpit (as many of them have variables, loops and conditionals). I like to contain the imperative parts actually in a proper programming language and wanted to keep my Markup as declarative as possible. And when I want to automate something, I'd like to do it in a proper programming language.
+</p>
+
+<p>
+So in a nutshell, what does my generator do? It reads in all files of a given directory and classifies them: the HTML files are either templates or content files and all other files are static assets. 
+</p>
+<p>
+For every file an object with metadata is created. The HTML files are also parsed into a DOM and the metamodel of the content file is enhanced by deriving certain more properties from the DOM (for example the first h1 that is encountered in a content file is considered to be the title). Then every content file is associated with a template. The template consists of standard HTML and plugins which are driven by the declarative markup. Every plugin is called with the whole metamodel of the overall website, which was created when the input directory was initially traversed, as argument. This makes it is relatively easy to for example to create internal backlinks, or let a syntax-highlighter run on server-side only, or to pre-build a search index and so on. Basically HTML is deserialized, the DOM API is used to look for a well-known but non-standard tag which indicates that a plugin should be invoked. The plugins are Javascript functions that can manipulate the current document (mostly by extending or rewrite parts of it imperatively), and they usually remove themselves afterwards, so that nothing non-standard remains. When all plugin have run, the DOM is serialized back to static HTML.
+</p>
+<p>
+The idea was heavily inspired by Stuart Langridges <a href="https://www.kryogenix.org/code/browser/generated-toc/ ">generated-toc</a> script, which uses the h1 - h6 tags to dynamically derive the markup for a table of contents section from them. An ingenious idea: Once you think about that a bit more abstractly, you realize that marking up a document in HTML is in itself an act of modelling out a data structure. So why not make good use of that structure? Many things that otherwise would have to be tediously created by hand can be automated. And once you have them automated it is also only a very small step to ask: why run that on every browser? To the extent that a transformations yields a deterministic result generating them statically is sufficient, if not even preferrable. I'm quite happy to run JS all day long on my computer, no need to send more than necessary of it to the browser.
+</p>
+
+<time datetime="2024-10-16 00:09">Wednesday, the 16th of October 2024</time>

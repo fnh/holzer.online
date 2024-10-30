@@ -119,6 +119,24 @@ body h2 {
     font-weight: bold;
 }
 
+
+section > article  {
+    position: relative;
+    width: 100%;
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important; 
+    border: 1px solid var(--main-border-color);
+}
+
+section > article > time {
+    position: absolute;
+    border: 1px solid var(--main-border-color);
+    top: -1.25rem;
+    right: -1rem;
+    background: var(--main-bg-color);
+    padding: 0.25rem;
+}
+
 main>section {
     max-width: 45rem;
     height: 100%;
@@ -200,7 +218,6 @@ dl dt {
     float: left;
     margin-right: .5rem;
 }
-
 
 main article pre {
     font-family: monospace;

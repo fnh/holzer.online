@@ -4,6 +4,71 @@
 <time datetime=""></time>
 </article> -->
 
+<article id="2024-11-14">
+<p>
+In 1986 the space shuttle Challenger broke apart in the air a bit over a minute into its flight. All seven astronauts died. This led to an inquiry by a commission of which Richard Feynman was a member. The final report contains an <a href="https://www.nasa.gov/history/rogersrep/v2appf.htm">appendix on the topic of reliability of shuttles</a> and the risk estimation. Feynman writes:
+</p>
+<blockquote>
+<p>
+If a reasonable launch schedule is to be maintained, <mark>engineering often cannot be done fast enough to keep up with the expectations of originally conservative certification criteria</mark> designed to guarantee a very safe vehicle. In these situations, <mark>subtly, and often with apparently logical arguments, the criteria are altered</mark> so that flights may still be certified in time. They therefore fly in a relatively unsafe condition, with a chance of failure of the order of a percent (it is difficult to be more accurate).
+</p>
+<p>
+<mark>Official management</mark>, on the other hand, claims to believe the probability of failure is a thousand times less. One reason for this may be an attempt to assure the government of NASA perfection and success in order to ensure the supply of funds. The other may be that they sincerely believed it to be true, <mark>demonstrating an almost incredible lack of communication between themselves and their working engineers</mark>.
+</p>
+</blockquote>
+
+<p>
+He then gives his thoughts how things should be handled:
+</p>
+
+<blockquote>
+Let us make recommendations to ensure that NASA officials deal in a world of reality in understanding technological weaknesses and imperfections well enough to be actively trying to eliminate them. They must live in reality in comparing the costs and utility of the Shuttle to other methods of entering space. And they must be realistic in making contracts, in estimating costs, and the difficulty of the projects. Only realistic flight schedules should be proposed, schedules that have a reasonable chance of being met. If in this way the government would not support them, then so be it.
+</blockquote>
+
+<p>
+He concludes his observations with a remark that is both very tragic, and very powerful:
+</p>
+<blockquote>
+For a successful technology, <mark>reality must take precedence over public relations</mark>, for nature cannot be fooled. 
+</blockquote>
+
+<time datetime="2024-11-14 22:40"></time>
+</article>
+
+<article id="2024-11-13">
+<p>
+Bartosz Korczyński has reimplemented huge parts of the classical <a href="https://github.com/BAndysc/AvaloniaVisualBasic6">Visual Basic 6 interface in C#</a> and made it <a href="https://bandysc.github.io/AvaloniaVisualBasic6/">runnable in the browser</a>. It is not a complete reimplementation, and I don't know how much of the actual language is supported. I managed to trigger a message box from the click handler of a command button, but I got an error when I tried to asign the content of an input to the caption of a label, but this recreation from scratch it is an impressive technical feat nonetheless.
+</p>
+<p>
+It would miss the point if you'd try to rewind the clocks to 1999, but I am sure that there many lessons to be rediscovered. For example, let's take the UI toolkit:
+</p>
+
+<img src="/notes/images/avalonia-vb6-ui-components.png" title="The standard ui components of Visual Basic 6: Picture, Label, Text, Frame, Command, Checkbox, Option (Radio Button), Combobox, Listbox, Horizontal Scrollbar, Vertical Scrollbar, Timer, Shape" alt="A screenshot of the standard ui components of Visual Basic 6. Left to right: Picture, Label, Text, Frame, Command, Checkbox, Option (Radio Button), Combobox, Listbox, Horizontal Scrollbar, Vertical Scrollbar, Timer, Shape">
+
+<p>
+Measured against today's standards, that is an incredibly small component library. The number of controls amount to a baker's dozen, four of them are hardly UI components in a stronger sense. Timers are an abstract concept, that they are made into a component is merely an overstrech of the metaphor, a convenient way to declare an object, maybe a bit of "golden hammer"-syndrome. The frame is visible, but actually just a tool to introduce a hierachy, so you can have multiple groups of radio buttons for example. Vertical and horizontal scrollbars would in today's toolkits on be an implementation details of a some container that happens to overflow. What are does that leave us with? Picture, Label, Text input, Command, Checkbox, Option button, Listbox, Combobox and Shape. Most of them can be mapped directly to HTML primitives that exisits since the early days of the web (granted, it took a while for SVG to become widely available, but the rest: just stardard controls). So, why on earth does every company needs to have their very own component library? Why do we consider it necessary to have a three-digit number of components at our disposal to create user interfaces to, let's face it, CRUD APIs that are persisted in relational databases? (Constrained) input, selection (single and multiple, maybe with a few constraints like: at least one or at most n), textual and graphical output, and a way to invoke commands, and we've got the 10% that cover 90% of the use cases.
+</p>
+<p>
+Certainly, the world did not stop spinning, a bit of refinement does not hurt. But I am under the impression, that something fundamental in culture of software design and engineering was lost over course of the last decades: a focus on the essentials, paid for with excessive complexity. Likely an instance of an effect that Gregor Hohpe has described and eponymously dubbed as <a href="https://architectelevator.com/gregors-law/">Gregor's Law</a>, it is <q>nature's punishment for organizations that are unable to make decisions</q>.
+</p>
+<p>
+Anyway, if somebody were to work towards a new <a href="/notes/#2024-11-10">software substrate</a> I think this is among the most fundamental lessons to be relearned.
+</p>
+<time datetime="2024-11-12 22:00"></time>
+</article>
+
+
+<article id="2024-11-11-1">
+<p>
+In the country where the <a href="https://en.wikipedia.org/wiki/Red_Queen%27s_race">red queen reigns supreme</a>, you might encounter a dependecy that you cannot get rid of wholesale, need to update and which breaks its interface. Happens more often than anybody cares to admit.
+</p>
+<p>
+I used to treat internal dependecies as, well, dependable. But experience taught me that a dependency which breaks once, usually will break again in the not too far away future. So to manage undependable dependecies you can create an anti-corruption layer and encapsulate all changes to the interface. As that comes at a cost and usually is only conforming to the initial upstream interface anyway, I tend to skip it the first time around, giving the dependency the benefit of the doubt. But when the interface turns out unstable it is "fool me once, shame on you, fool me twice shame on me"; make sure that the fix also ensures that adapting the next time will be a matter of editing a single module under your own control.
+</p>
+<time datetime="2024-11-11 21:23"></time>
+</article>
+
+
 <article id="2024-11-11">
 
 <blockquote>
@@ -90,9 +155,7 @@ Did I ever tell you that I was once named as <a href="https://en.wikipedia.org/w
 
 <h1 style="display: none;">Notes</h1>
 
-<!--
-<intertwingle plugin="extract-feed"
+<!-- <intertwingle plugin="extract-feed"
               description="Notes"
               filename="notes/index.xml">
-</intertwingle>
--->
+</intertwingle> -->

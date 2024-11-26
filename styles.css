@@ -132,7 +132,7 @@ section > article > time {
     position: absolute;
     border: 1px solid var(--main-border-color);
     top: -1.25rem;
-    right: -1rem;
+    right: 1rem;
     background: var(--main-bg-color);
     padding: 0.25rem;
 }

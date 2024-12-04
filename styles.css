@@ -8,6 +8,7 @@
     --padding-left: 2rem;
 }
 
+
 @media (prefers-color-scheme: dark) {
 
     :root {
@@ -36,6 +37,9 @@
     }
 }
 
+a {
+    text-underline-offset: 2px;
+}
 
 nav ul {
     list-style: none;
@@ -147,6 +151,12 @@ main>section {
 main article {
     align-self: flex-start;
     padding: 0.2rem 1rem 0.2rem 1rem;
+}
+
+p,
+blockquote {
+  hyphens: auto; 
+  text-align: justify;
 }
 
 @media (max-width: 49rem) {

@@ -4,6 +4,31 @@
 <time datetime=""></time>
 </article> -->
 
+<article id="2024-12-05">
+<p>
+The unix philosophy of composing programs by piping streams of bytes from the standard output of one process to the standard input of the next one is well and widely understood. When it comes to having something even only vaguely similar for UIs, programs are considerably less "cooperative".
+</p>
+<p>
+For desktop apps (which turned from being "the norm" to a niche) the points of connections are, in the best case, based on a shared / standardized / application-agnostic file format. A good example, which might even serve as a bridge to the world of the command line, is CSV, which you could think of as lowest common denominator for spreadsheets, on a higher level of complexity you have ODF for office applications. Composition in this case takes the form of working on the same file with a sequence of different applications. The much more common, much more brittle and much less sophisticated mechanism is the venerable clipboard. The copying from one process to a temporarily globally accessible, shared in-memory location to an appropriate input is then done ad hoc and manually. With a bit of abstraction it also resembles a pipe.
+</p>
+<p>
+For web applications it seems to be even bleaker, the default browser security policies are all protections against client-side composition. And at that point I also have to note that most of them have been retrofitted into the web platform because of the abuse scenarios which their absence can enable.
+</p>
+<p>
+But, even if you'd run a bunch of applications behind a reverse proxy on machines under your control, so that same-origin, mixed-origin and HTTP headers were but a <a href="https://en.wikipedia.org/wiki/Small_matter_of_programming"><i>small matter of programming</i></a>, integrating/composing web apps is would be non-trivial and requires a ton of bespoke development work. 
+</p>
+<p>
+Yahoo Pipes for a few years enabled tech savvy users to build data mashups from resources and API on the open web with relative ease and comparatively little programming. The service shot down nearly a decade ago and nothing comparable has emerged since. The open web as a source of data also has has dryed up considerably over time (at least unless you are a company with an excess of capital for funding an army of scraping bots overseen by a staff of engineers). 
+</p>
+<p>
+But let's cast all that aside for a moment, we are also lacking some fundamental ideas on how macro-level composition mechanism for UIs ought to look like. Applications are generally packaged as black boxes which do not expose a model that would expose its capabilities, its inputs and outputs in a way that would make scripting (or  macro-recording?) possible or even convenient. 
+</p>
+<p>
+The more I think about it, it strikes me as odd: At all times we already <em>have</em> a model of what the application is capable of: its source code. The explicitness of the interface is through the build process literally lost in translation. So, since we are incapable of "talking" about applications after putting them into a form that suits the operating system (and in that sense a browser is an operating system as well), I think Dan Ingalls, was onto something when he <a href="http://www.cs.virginia.edu/~evans/cs655/readings/smalltalk.html">wrote</a>: <q>An operating system is a collection of things that don't fit into a language. There shouldn't be one.</q> 
+</p>
+<time datetime="2024-12-05 18:10"></time>
+</article>
+
 <article id="2024-12-04">
 <p>
 Software has long since abandoned the philosophy of "big bang" releases, why do I expect that the same does not apply to the written word? Writing is thinking, good thinking doesn't just happens over night, but needs time. Increments can be incomplete, and still already be of some value. Just because one increment of your thinking is out, that does not imply that a given topic is concluded. The imperfections of a momentary snapshot are no reason to deprive yourself of reaping the potential benefits that can be in making them public: delivering partial value, inviting more feedback, making progress visible. 

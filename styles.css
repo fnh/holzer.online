@@ -8,6 +8,15 @@
     --padding-left: 2rem;
 }
 
+.rollable-dice {
+    text-decoration: none!important;
+}
+
+.rollable-dice:active {
+    transform: rotate(3turn);
+    transition: 1s;
+}
+
 
 @media (prefers-color-scheme: dark) {
 
@@ -97,10 +106,10 @@ ul.intertwingle-toc-top {
 body {
     background-color: var(--article-bg-color);
     color: var(--main-text-color);
-    font-family: Didot, 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif; 
+    font-family: Didot, 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif;
     margin: 0;
     display: grid;
-    grid-template-rows: auto 1fr;    
+    grid-template-rows: auto 1fr;
     height: 100dvh;
     font-size: 1.25rem;
     line-height: 2rem;
@@ -120,7 +129,7 @@ body h2 {
 }
 
 
-section > article  {
+section>article {
     position: relative;
     margin-top: 3rem !important;
     border: 1px solid var(--main-border-color);
@@ -128,7 +137,7 @@ section > article  {
     box-shadow: var(--main-border-color) 0.25rem 0.5rem .75rem 0.5rem;
 }
 
-section > article > time {
+section>article>time {
     position: absolute;
     border: 1px solid var(--main-border-color);
     top: -1.25rem;
@@ -150,8 +159,8 @@ main article {
 
 p,
 blockquote {
-  hyphens: auto; 
-  text-align: justify;
+    hyphens: auto;
+    text-align: justify;
 }
 
 @media (max-width: 49rem) {
@@ -170,6 +179,7 @@ blockquote {
 }
 
 @media (min-width: 49.1rem) and (max-width: 67.9rem) {
+
     section>aside,
     article>aside {
         padding-top: 1rem;
@@ -249,17 +259,20 @@ nav a:focus {
     text-decoration: underline;
 }
 
-article a, section a {
+article a,
+section a {
     text-decoration: underline dotted;
 }
 
 
-article a:hover, section a:hover {
+article a:hover,
+section a:hover {
     text-decoration: underline;
 }
 
 
-article a:focus, section a:focus {
+article a:focus,
+section a:focus {
     text-decoration: underline double;
 }
 

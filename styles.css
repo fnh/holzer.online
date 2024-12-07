@@ -10,11 +10,12 @@
 
 .rollable-dice {
     text-decoration: none!important;
+    margin-right: 1rem;
 }
 
 .rollable-dice:active {
     transform: rotate(3turn);
-    transition: 1s;
+    transition: 1.5s;
 }
 
 

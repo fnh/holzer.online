@@ -9,8 +9,22 @@
 }
 
 .rollable-dice {
+    display: inline-block;
     text-decoration: none!important;
     margin-right: 1rem;
+}
+
+@keyframes rotation {
+  50% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.rollable-dice:hover {
+  animation: rotation 1s infinite ease-in-out;
 }
 
 .rollable-dice:active {

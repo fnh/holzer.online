@@ -4,6 +4,19 @@
 <time datetime=""></time>
 </article> -->
 
+<article id="2024-12-10">
+<p>
+I've written about <a href="/articles/benefits-of-classless-css/">the benefits of classless CSS</a> a while ago, and I still mostly stand by it. I don't use an intermediate format (like markdown/ asciidoc etc), so it keeps my markup relatively free of clutter. For text-heavy sites with a relatively regular structure it can go quite a long way. But over time, I came across a few edge cases. And to be honest, I happily compromise on philosophical purity, and added a few classes. 
+</p>
+<p>
+The prime example is syntax highlighting. I use prism.js for it, which tokenizes the sourcecode to be highlightes, puts each token into a span and adds the appropriate classes for it. I bundle the CSS from the prism package in the pages where they are needed. Another example are one-off decisions outside any very regular structure. For example I recently animated the dice icon in the top-bar. Classless CSS relies on the premise, that the markup itself clearly characterizes the essence/purpose of each element, which in this case just doesn't hold true. Also, when selectors start to get overloaded classless CSS can get messy too.
+</p>
+<p>
+So, maybe the combination of mostly selector-based styles with pragmatic use of classes sprinkled in would describe my approach now better. It has a drawback though: doesn't have the same ring to it as <i>classless</i> has. I'm a terrible marketer, so if anybody come up with a catchy term, I'd be all ears.
+</p>
+<time datetime="2024-12-10 17:35"></time>
+</article>
+
 <article id="2024-12-06">
 <p>
 A dump of a few links related to tagging and categorization: 

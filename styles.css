@@ -163,7 +163,7 @@ section>article>time {
 
 main>section {
     max-width: 45rem;
-    height: 100%;
+    height: calc(100% - 42px);
     align-self: flex-start;
     margin: 1rem calc(1rem + var(--padding-left)) 1rem calc(1rem + var(--padding-left));
 }

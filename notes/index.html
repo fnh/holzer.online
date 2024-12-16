@@ -4,6 +4,27 @@
 <time datetime=""></time>
 </article> -->
 
+<article id="2024-12-16">
+<p>
+The <a href="https://dillo-browser.github.io/">dillo browser</a> turned 25 recently, and - unlike the five year older Netscape Navigator - is still alive and kicking. 
+</p>
+<p>
+The project had been dormant for years and was revived by a few enthusiast only some month ago. Today it was on front page of the beloved orange site, which was an impulse to give it a try.
+</p>
+<p>
+I'm afraid to report that non-programmers cannot expect to find too much help to just grab a binary and start browing, the last debian package that you can install is ages old, and does not reflect the last state. I had to build it build from source. Ok, cloning the repo, finding the install instructions (because: if you download the zip file instead of clone the repo the necessary steps are missing), installing another dependency (fltk 1.3) and seven simple shell commands later, I could successfully browse my site. This is how it currently is rendered:
+</p>
+<img src="/notes/images/holzer-online-dillo-with-styles.png" alt="A screenshot of the dillo browser rendering https://holzer.online with CSS">
+<p>
+Interesting to me, as I had not anticipated it quite like that. But the JS-free two-level drop-down on hover menu relies on a few newish CSS features, so not too suprising that it doesn't look quite right. So let's disable CSS (something that dillo can does pretty easily), and indeed that looks, if not better, at least less broke:
+</p>
+<img src="/notes/images/holzer-online-dillo-no-css.png"  alt="A screenshot of the dillo browser rendering https://holzer.online, CSS disabled">
+<p>
+That now leaves me wondering whether there's a graceful degradation technique for CSS that I could use to keep my styles around while still being able to cater to such niche browsers, if only as a a little gesture against the stifling monoculture brought to us by the Chrome / Safari duopoly.
+</p>
+<time datetime="2024-12-16 16:58"></time>
+</article>
+
 <article id="2024-12-11">
 <p>
 I generally don't mind writing into the void, but I know many others do. Regarding the purpose of the act of contributing on and to the open web, Jay Hoffmann offers a perspective in his article <a href="https://thehistoryoftheweb.com/the-free-web/

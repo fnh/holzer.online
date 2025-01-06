@@ -68,16 +68,16 @@ a {
 nav ul {
     list-style: none;
     margin: 0;
-    padding-left: var(--padding-left);
+    padding-left: calc(0.5rem + var(--padding-left));
 }
 
 nav ul li {
     display: block;
     float: left;
-    padding: 1rem;
+    padding: 0.5rem;
     position: relative;
     text-decoration: none;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
 }
 
 
@@ -87,7 +87,7 @@ nav ul li ul {
     opacity: 0;
     min-width: 5rem;
     position: absolute;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     left: 0;
     display: none;
 }
@@ -421,6 +421,11 @@ summary h2 {
         border: 0;
         box-shadow: none;
         overflow: hidden;
+    }
+
+    section>article>time {
+        position: unset;   
+        background: unset;    
     }
 
 }

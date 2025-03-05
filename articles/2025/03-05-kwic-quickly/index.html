@@ -1,0 +1,65 @@
+<meta name="topics" content="software-engineering">
+
+<article>
+<h1>KWIC, quickly</h1>
+
+<p>
+I recently reread David Parnas classic paper <a href="https://dl.acm.org/doi/pdf/10.1145/361598.361623">On the Criteria To Be Used in Decomposing Systems into Modules</a>. Parnas shows two different approaches to program decompostion illustrated on one example problem, the <a href="https://en.wikipedia.org/wiki/Key_Word_in_Context">KWIC index</a>. He writes:
+</p>
+
+<blockquote>
+This is a small system. Except under extreme circumstances (huge data base, no supporting software), such a system could be produced by a good programmer within a week or two.
+</blockquote>
+
+<p>
+The remark about the effort, which is actually only an insignificant aside in the paper, caught my eye. Two weeks is the typical length of a sprint, so most working programmers will have an intiution about the amount of work that is on average fitted into such a timeframe. Here is what would supposedly have be a reasonable expectation in 1972:
+</p>
+
+<blockquote>
+The KWIC index system accepts an ordered set of lines, each line is an ordered set of words, and each word is an ordered set of characters. Any line may be "circularly shifted" by repeatedly removing the first word and appending it at the end of the line. The KWIC index system outputs a listing of all circular shifts of all lines in alphabetical order.
+</blockquote>
+
+<p>
+The following implementation, straight from that spec, took less than 20 minutes, which included 10 minutes of reading up on the various configuration options of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare">localeCompare</a> (TL;DR: the defaults are quite decent):
+</p>
+
+<code><pre><intertwingle plugin="syntax-highlighting">
+function circularShift(line) {
+    let [head, ...rest] = line;
+    return [...rest, head];
+}
+
+function circularShifts(line) {
+    let all = [line];
+    let last = line;
+    for (let i = 1; i < line.length; i++) {
+        last = circularShift(last);
+        all.push(last);
+    }
+    return all;
+}
+
+function lineComparator(l1, l2) {
+    let first = l1.join(" ");
+    let second = l2.join(" ");
+    return first.localeCompare(second);
+}
+
+/**
+ * @param {string[][]} lines
+ */
+function kwicIndex(lines) {
+    return lines
+        .map(line => circularShifts(line))
+        .flat()
+        .sort(lineComparator);
+}
+</intertwingle></pre></code>
+
+<p>
+Under the assumption Parnas' estimate of the required effort was not hyperbolic, and let's take the lower end of it (a 40h work week), that results in a factor of 120 in improved productivity (120 * 20min = 40h), simply for having bog-standard Javascript available (I presume it will translate to the same order of magnitude in most higher programming languages), and all without having to bother myself with a Large Looting Model.
+</p>
+
+<time datetime="2025-03-05 20:51"></time>
+
+</article>

@@ -4,6 +4,29 @@
 <time datetime=""></time>
 </article> -->
 
+<article id="2025-03-27">
+<p>
+In git command line options match already if they are unambigous with regard to the prefix. So instead of passing --amend you can write:
+</p>
+<code>
+git commit --amen
+</code>
+<p>
+If you've amended a commit, it of course gets a new hash. So if it was already pushed to a remote, you indeed better pray that nobody else has committed and pushed in the meantime, because you now need to push the amended commit with -f. Or, to add some extra sillyness, you can create an alias for the push command, like
+</p>
+<code>
+git config --global alias.punish push
+</code>
+<p>
+So you can finally:
+</p>
+<code>git punish --force</code>
+<p>
+Arguably, when you can and need to force push to the trunk/main/master branch, someone being punished forcefully might be quite adequate...
+</p>
+<time datetime="2025-03-27 20:18"></time>
+</article>
+
 <article id="2025-03-25">
 <p>
 Ward Cunninghams C2 WikiWikiWeb <a href="https://wiki.c2.com/?WikiHistory">turns 30 today</a>. Sadly, it is in read-only mode for more than ten years now. But I am happy that it is still out there. A glimpse of a web that was, a memory of the web I got exited about, a testimony to what the web could have been, and a hint on the many possibilities of this medium that are still for us to create and explore. Further on up the road!

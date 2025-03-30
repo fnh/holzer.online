@@ -1,0 +1,81 @@
+<meta name="topics" content="software-engineering">
+
+<article>
+<h1>Type-safe lookup tables</h1>
+
+<p>
+In some scenarios I prefer to use a lookup table instead of a dynamic dispatch (or a switch statement / if-else-cascade). In Typescript I usually denote it like this:
+</p>
+
+<code><intertwingle plugin="syntax-highlighting" language="typescript"><pre>
+type LookupKey = string | number | symbol;
+
+type LookupTable<
+    LookupKey extends (string | number | symbol),
+    ReturnType
+> = {
+    [key in LookupKey]: ReturnType
+};
+</pre></intertwingle></code>
+
+<p>
+Let's suppose you need to handle commands that you receive via some message channel.
+</p>
+
+<code><intertwingle plugin="syntax-highlighting" language="typescript"><pre>
+const COMMANDS = [
+    "a",
+    "b",
+    "c",
+] as const;
+
+type CommandName = typeof COMMANDS[number];
+</pre></intertwingle></code>
+
+<p>
+With the <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions">as const assertion</a> the type of the array COMMANDS is narrowed to a readonly tuple of the assigned values instead of an array of string that would have been infered without the assertion. And by using an <a href="https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html">indexed access type</a>, you can then create a discriminated union of the legal key names, that is derived from the values of the array. With this type then you can create a specific lookup table:
+</p>
+<code><intertwingle plugin="syntax-highlighting" language="typescript"><pre>
+type CommandHandlerTable = LookupTable<
+    CommandName, 
+    () => void
+>;
+
+const COMMAND_HANDLER: CommandHandlerTable = {
+    "a": () => {},
+    "b": () => {},
+    "c": () => {},
+};
+</pre></intertwingle></code>
+
+<p>
+What is nice is that this list of legal keys serves two purposes at once: at compile-time to check for exhaustiveness, as well as at runtime to make validations on the actual objects. If you assert that clients might send malformed messages, you need to check all objects that are supposedly commands, before actually executing code that assumes that what ever is send has property which is a legal key in any given lookup table. You can do this with a type guard like the following:
+</p>
+
+<code><intertwingle plugin="syntax-highlighting" language="typescript"><pre>
+type Command = {
+    type: CommandName
+}
+
+function isCommand(message: any): message is Command {
+    if (message && message.type) {
+        return COMMANDS.includes(message.type);
+    }
+    return false;
+}
+</pre></intertwingle></code>
+<p>
+Now a the implementation of a handler might look like this:
+</p>
+<code><intertwingle plugin="syntax-highlighting" language="typescript"><pre>
+function execute(message: any) {  
+    if (isCommand(message)) {
+        COMMAND_HANDLER[message.type]();
+    }
+}
+</pre></intertwingle></code>
+<p>
+So by simply adding a new value to COMMANDS the compiler will enforce that a handler is added to the COMMAND_HANDLER lookup table, as well as derive the discriminated union of legal keys to the table without having to touch the CommandName type. The execute function doesn't need to be changed, just because a command is added. And if you are willing to forgo the compile-time safety guarantees, this also makes it relatively straight forward to enable the dynamic extension of a system, although in the latter case you'd need some additional logic to prevent "undefined is not a function" exceptions.
+</p>
+<time datetime="2025-03-30 19:00"></time>
+</article>

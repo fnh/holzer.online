@@ -1,0 +1,41 @@
+<article>
+<h1>CSS Naked Day</h1>
+
+<p>
+On the 9th of April, the <a href="https://css-naked-day.org/">CSS Naked Day</a> takes place, its intention is to promote good web development standards, like <q>proper use of HTML, semantic markup, a good hierarchy structure, and of course, a good old play on words</q>. The participating sites will remove all styling for a whole international day (meaning: as long as somewhere on the world it is already or still the 9th of April). One of the event organizers, Jens Meiert, has some further explanations in <a href="https://meiert.com/en/blog/css-naked-day-and-wikipedia/">CSS Naked Day and the Missing Wikipedia Page</a>:
+</p>
+
+<blockquote>
+The purpose of the event is to advocate for improved maintainability through separation of concerns. Generally speaking, this is possible only if document structure is handled by HTML, and styling and design by CSS. Removing or commenting CSS code and references, as done during CSS Naked Day, leads to displaying only the document structure as governed by user agent styling of the respective HTML code, demonstrating said separation and maintainability, and appearing “naked.” (A website or app that mixes concerns by using presentational markup would still look at least partially styled.)
+</blockquote>
+
+<p>
+In order to practice what I generally preach, I will participate as well. I've implemented the following little script for it (which should have me covered for the following years as well). 
+</p>
+<code><intertwingle plugin="syntax-highlighting" language="javascript"><pre>
+function isNakedCssDay() {
+    let year  = new Date().getFullYear();
+    let begin = new Date(`${year}-04-09 00:00 UTC+14:00`);
+    let end   = new Date(`${year}-04-10 00:00 UTC-12:00`);
+    let now   = new Date();
+    return now >= begin && now <= end;
+}
+
+function removeStyling() {
+    document.querySelector("link[rel=stylesheet]").remove();
+    document.querySelectorAll("style").forEach(style => style.remove());
+    document.querySelectorAll("*").forEach(el => el.style.cssText = "");
+}
+
+setTimeout(() => {
+    if (isNakedCssDay()) {
+        removeStyling();
+    } 
+});
+</pre></intertwingle></code>
+
+<p>
+For a preview outside of the event, or on other websites, you can use the <a href="javascript:(function()%7Bdocument.querySelector(%22link%5Brel%3Dstylesheet%5D%22).remove()%3B%0Adocument.querySelectorAll(%22style%22).forEach(style%20%3D%3E%20style.remove())%3B%0Adocument.querySelectorAll(%22*%22).forEach(el%20%3D%3E%20el.style.cssText%20%3D%20%22%22)%3B%7D)()%3B">removeStyling()</a> function also as a bookmarklet.
+</p>
+<time datetime="2025-04-07 16:50"></time>
+</article>

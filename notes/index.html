@@ -4,6 +4,23 @@
 <time datetime=""></time>
 </article> -->
 
+
+<article id="2025-04-23">
+<p>
+I'm in in the process of refactoring two command-line tools, and I'm wondering if it is somehow possible to quantify when you enter the territory of diminishing returns. Both tools are essentially working well, the refactoring is for the sake of the maintainer.
+</p>
+<p>
+In one case (at work) that will be someone who is not me. This codebase follows a rather old-school ES5-style, and contains a few idioms that a whole generation of programmers has not been exposed to, so first order of business is to bring it into a more palatable form. After that, the question is: improve the typeing, improve the test suite, write some more documentation or call it a day and schedule the handover? Time is money, and I cannot spend too much on something that basically already does the job, so what has the most utility per hour invested? No conclusion yet.
+</p>
+<p>
+In the other case the maitainer is and will remain I myself, because the other tool is my SSG. I only touch every once in a while. So now the choice to write plain JS, which was done to avoid dealing too much with toolchain setup (albeit using every nicety that was baseline in 2023) is catching up with me when I occasionally want to add/modify a plugin. As node 23 can execute TypeScript (or at least a huge subset of it) directly, I still get away without tooling and add types to help taking load from my memory. 
+</p>
+<p>
+Being easy on the maintainers memory/mental load seems to be the overarching theme here and the trait that I might want to optimize for in future projects way earlier than I used to do.
+</p>
+<time datetime="2025-04-23 20:43"></time>
+</article>
+
 <article id="2025-04-19">
 <p>
 I expect some of the software I work on to be in operation for decades, so one question I ponder regularly is how to make its design viable for this assumed lifespan. Experience teaches it's certain that some of the third-party dependencies will breaking changes and even their end-of-life. Full rewrites are rarely feasible, let alone economically viable, so many application languish for a long time as long as they still generate revenue (a branch of my employer just a recently,  without any trace of irony, advertised a position for a VB 6 developer). So how not to get trapped by that?

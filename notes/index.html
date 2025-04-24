@@ -4,6 +4,18 @@
 <time datetime=""></time>
 </article> -->
 
+<article id="2025-04-24">
+<p>
+As much as I sing the praises of <a href="https://boringtechnology.club/">choosing boring technology</a>, occasionally even the most boring technologies have their interesting moments. And by that I mean interesting as in the old curse: may you live in interesting times...
+</p>
+<p>
+For something as mundane as the Java/Jakarta EE equivalent of JSON.parse (or simply writing an object literal in Javascript), there is a design desicion that results in a completely preventable performance nightmare: When you use Json.createObjectBuilder(), or Json.createArrayBuilder(), each call will do a scan of the class path to look up the implementation of the JSONP interface. This is required to be compliant with the Jakarta EE spec. Which in theory enable to swap the implementation of JSONP on the application server at runtime, but in practice you never do that, and more important: the naive usage of the API comes at the huge cost with regard to performance. In the still <a href="https://github.com/jakartaee/jsonp-api/issues/154">unresolved issue</a> that was brought up six years ago somebody reported a factor of 7200 as compared to the relativly simple solution: Always assign the JSONP provider to a static final field (maybe in a Utility class) and always use that instance to call createObjectBuilder().
+</p>
+<code><pre><intertwingle plugin="syntax-highlighting" language="java">
+public static final JsonProvider JSONP = JsonProvider.provider();
+</intertwingle></pre></code>
+<time datetime="2025-04-24 20:45"></time>
+</article>
 
 <article id="2025-04-23">
 <p>

@@ -99,6 +99,8 @@ nav ul li ul:hover {
     visibility: visible;
     opacity: 1;
     border: 1px solid var(--main-text-color);
+    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
     border-top: 0;
     display: block;
     padding-left: 0;
@@ -316,6 +318,16 @@ blockquote {
 header {
     background-color: var(--main-bg-color);
     border-bottom: 1px solid var(--main-text-color);
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+footer nav {
+    display: flex; 
+    justify-content: center; 
+    border-top: 1px solid var(--main-border-color);
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
 }
 
 aside h2 {

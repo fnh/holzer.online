@@ -28,7 +28,7 @@ Last updated <span id="lastUpdateOutlet"></span>:
 <h2>Recent updates</h2>
 <ul style="list-style: none; padding-left: 0.5rem;">
 <intertwingle plugin="last-pages-of" 
-        category="articles,weeknotes"
+        category="articles,weeknotes,notes,now,changelog"
         grouped-by="month"
         number-of-items="10">
 <template>
@@ -48,7 +48,7 @@ Last updated <span id="lastUpdateOutlet"></span>:
     <span class="p-note">A programmer, interested in life, the universe and everything...</p>
 </div>
 
-<intertwingle plugin="pages-as-json" filename="pages.json" category="articles,weeknotes,100"></intertwingle>
+<intertwingle plugin="pages-as-json" filename="pages.json" category="articles,weeknotes,100,notes"></intertwingle>
 
 <script>
 const last = new Date(lastUpdatedAt.getAttribute('datetime'));

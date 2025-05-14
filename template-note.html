@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Fabian's public notepad</title>
+    <meta name="template" content="note">
+
+    <meta charset="utf-8">
+
+    <meta name="author" content="Fabian Holzer">
+    <meta name="description"
+        content="Thoughts on topics like software engineering, web development, blogging and the web in general">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="template" content="note">
+
+    <link rel="icon" href="/favicon.svg" type="image/svg">
+
+    <link rel="canonical" href="https://holzer.online/">
+
+    <link rel="stylesheet" href="/styles.css">
+
+    <link rel="alternate" type="application/rss+xml" href="https://holzer.online/feed.xml">
+
+     <link rel="webmention" href="https://holzer.online/api/webmention">
+
+</head>
+
+<intertwingle plugin="create-title"></intertwingle>
+
+<body>
+
+
+    <header>
+        <intertwingle plugin="include" file="main-navigation.html"></intertwingle>
+    </header>
+        
+    <main id="main">
+        
+        <intertwingle plugin="main-content"></intertwingle>
+
+        <intertwingle plugin="compose" insertAfter="p" position="beforebegin">
+        <p style="text-align: right; font-size: 1rem;">
+            <span style=" padding: 1rem;">
+            <intertwingle plugin="publication-date"></intertwingle>
+            &#x2022;
+            <intertwingle plugin="word-count"></intertwingle> words
+            </span>
+        </p>
+        </intertwingle>
+
+        <nav style="
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0 1rem calc(1rem + var(--padding-left));
+            width: calc(min(90%, 45rem));
+            align-self: flex-start;"
+        >
+            <span>
+                <intertwingle plugin="previous-page" 
+                    target="here"
+                    link-text="&lt;- Previous">
+                </intertwingle>
+            </span>
+
+            <span>
+                <a href="/notes/">Notes archive</a>
+            </span>
+
+            <span>
+                <intertwingle plugin="next-page" 
+                    target="here"
+                    link-text="Next -&gt;">
+                </intertwingle>
+            </span>
+        </nav>
+
+        <!-- <intertwingle plugin="backlinks" category="articles,weeknotes,notes"></intertwingle> -->
+
+        <intertwingle plugin="include" file="footer-navigation.html"></intertwingle>
+
+    </main>
+
+    <intertwingle 
+            path="/scripts/intertwingle/" 
+            plugin="hit-counter">
+    </intertwingle>
+</body>
+
+</html>

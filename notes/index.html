@@ -7,6 +7,28 @@
 <time datetime=""></time>
 </article> -->
 
+<article id="2025-09-10">
+<p>
+In the light of the <a href="https://www.aikido.dev/blog/npm-debug-and-chalk-packages-compromised">recent attacks on the npm package ecosystem</a>, here's a bunch of functionality that the in recent node versions can be done or used without installing a dependecy.
+</p>
+
+<ul>
+<li>Using a subset of <a href="https://nodejs.org/en/learn/typescript/run-natively">Typescript natively without compilation step</a></li>
+<li><a href="https://nodejs.org/en/learn/test-runner/using-test-runner">Running unit tests</a>, writing <a href="https://nodejs.org/api/assert.html">assertions</a></li>
+<li><a href="https://nodejs.org/docs/latest-v24.x/api/cli.html#--watch">Watch mode</a></li>
+<li><a href="https://nodejs.org/en/learn/command-line/how-to-read-environment-variables-from-nodejs">Reading out .env files</a></li>
+<li><a href="https://nodejs.org/api/util.html#utilparseargsconfig">Parsing command line arguments</a></li>
+<li><a href="https://nodejs.org/api/util.html#utilstyletextformat-text-options">Pretty console output</a></li>
+<li><a href="https://nodejs.org/api/globals.html#fetch">HTTP client (fetch API)</a>, <a href="https://nodejs.org/api/http.html">HTTP servers and WebSockets</a></li>
+<li><a href="https://nodejs.org/api/sqlite.html">SQLite</a></li>
+</ul>
+
+<p>
+I'm not saying that is enough to support a big application, but the out-of-the-box experience compared to a few years ago, where this list would represent at least a dozen (dev-)dependencies and likely install a three digit number of packages, is quite decent. You can get a pretty far with that for a CLI tool or to prototype a REST-API. No need to sweat over <code>npm audit</code>. 
+</p>
+<time datetime="2025-09-10 19:08"></time>
+</article>
+
 <article id="2025-09-02">
 <p>
 If you want to make a point or are trying to convince someone of something, avoid the fallacy of <a href="https://en.wikipedia.org/wiki/Argument_from_authority">arguing from authority</a> like the plague. And, although a corollary, never ever appeal to the authority vested in you as a person through your position in an organization. Whether or not your position has actually any form of coercive power (rather few actually do), once you resort to that, you will immediately lose the argument, just like you lose the trust and esteem of your peers that might have took you years to build.

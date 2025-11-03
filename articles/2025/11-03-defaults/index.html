@@ -1,0 +1,42 @@
+<meta name="topics" content="software-engineering">
+<article>
+<h1>The devil is in the defaults...</h1>
+
+<p>
+Recently a bugfix at work reminded me of a story from ages ago, and a small, yet important lesson on the importance of defaults in API design, that I took away from it.
+</p>
+<p>
+So, back in the days, when commuting to work was some kind of bad default most of us were stuck to for no apparent reason, we merrily programmed forms, using a happy little in-house component library. And like any proper component library, this particular one came with a special company-custom button, for merely slapping CSS classes on a plain HTML <code>&lt;button&gt;</code> element and calling it a day is beneath the dignity of serious enterprise APIs. 
+</p>
+<p>
+Back then the company employed a small tribe of shamans (they called themselves designers, but I suspect mostly just because they had rent to pay and shaman is not considered a cromulent job title in an enterprise email signature) who in their unerring wisdom handed out guidelines for the enlightening and overall betterment of the world. These guidance foresaw that buttons shall come in many variations. Amongst them such that were to be used for finalizing actions, and such for destructive actions (with a red background, as if to menacingly say <q>click me, oh user, if you dare</q>), or those that looked like an ordinary link, but clicking them only performed sideffects on the very same page (the only page to be exact, because, like all civilized folks in 2010s, we built single-page apps). And, last but not least, the garden-variety of for all other commands of secondary importance that the toolbar of an enterprise application might want to offer to be invoked.
+</p>
+<p>
+Meanwhile, a different tribe, the sages of software architecture, in their sisyphean quest to herd the developers (which you can herd pretty much the same way as you herd a glaring of wild cats), became a bit agitated. They feared the notion of creative interpretation of the shamans' guidelines. To prevent anarchy by means of committee steered standardization, one of their young'uns was charged with the creation of the aforementioned library, so that all code bases, just like all happy families, in the end would be alike (the Anna Karenina principle of API design), and each button that would save a form might have resembled something like this (and made damn sure that nobody did something crazy like <a href="https://gomakethings.com/just-use-a-button/">just using a button</a>!):
+</p>
+<code><pre>
+&lt;special-company-button id=saveCmd variation=finalize&gt;
+Save
+&lt;/special-company-button&gt;
+</pre></code>
+<p>
+Everything hummed along quite fine, and the garden-variety, to the suprise of no-one, was by some margin the most common variation. 
+That was why in the initial implementation it was chosen as the default value for the variation. That was what naive younger me thought at least, until that fateful day, when the maintainer of that special-company-button component, with the impeccable reasoning that the most important thing on any form to do was to finally submit it, decided that the default variant henceforth should be <i>finalize</i>. No big deal. A one liner, changed, committed and released  as a minor version somewhere between a late standup and the lunch break.
+</p>
+
+<p>
+Well, semantic versioning, my sweet behind... No amount of reasoning helped to roll that change back. So,  all usages of that component without specific value set (suffice to say, quite a few...) had to be touched again.</p> 
+
+<p>Joshua Bloch, the mind behind some of the most used APIs in the Java ecosystem, has a great talk on <a href="https://www.youtube.com/watch?v=aAb7hSCtvGw">How to Design a Good API and Why it Matters</a> (<a href="https://newt.com/java/GoodApiDesign-JoshBloch.pdf">PDF</a>) and a condensed set of <a href="https://www.infoq.com/articles/API-Design-Joshua-Bloch/">maxims for API design</a>, one of which I felt particularly strong that day (and ever since):
+</p>
+
+<blockquote>
+Public APIs, like diamonds, are forever. You have one chance to get it right so give it your best.
+</blockquote>
+
+<p>
+Good defaults reduce cognitive load, and make the most common use cases easy. The best details are those where you (most of the time) don't have to spend brain cycles on. And even seemingly small semantically incompatible changes in widely used public API have a huge impact. Defaults ought to be trustworthy. Primitive value changes are something that a type system usually does not catch (unlike renaming a package or class, or changing a method signature), updating feels smooth and leave you with a silently broken UI at run time. To drive the point home: <strong>Default values are public APIs</strong>. Handle with care.
+</p>
+
+<time datetime="2025-11-03 21:50"></time>
+</article>

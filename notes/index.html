@@ -7,6 +7,33 @@
 <time datetime=""></time>
 </article> -->
 
+<article id="2025-12-27">
+<p>
+The year is almost over. It was a comparatively bad one. 
+</p>
+<p>
+A bit less than six month from now I might be able to celebrate having orbited around the sun on spaceship Terra for the fortieth time. 
+To put it otherwise, I am old enough to know that the first day of 2026 will not be that much different from the last four days of 2025.</p>
+<p>
+My theme for the next time shall be: <i>via negativa</i>. Gaining clarity about what is irrelevant and relentlessly cutting it out of my life.
+</p>
+<time datetime="2025-12-27 23:00"></time>
+</article>
+
+<article id="2025-12-09">
+<p>
+Time is a great filter. Nearly to the day last year I listed <a href="/notes/#2024-12-10-1">half a dozen ideas</a> that I considered either building or spinning up as self-hosted service. The ugly truth: I did none of it.
+
+<p>
+The feed reader? Well, just yesterday I mused about getting rid of the news. Maybe limiting my access to the feeds to a single machine is a feature. A Personal (Kanban) Board? To keep track of all the stuff I procrastinate? Would have been waste. And isn't Kanban all about reducing waste? Getting images out from the phone to some place not owned by big tech still kind of sucks. That is a service I would buy, provided I'd find a good one. Speaking of buying: I should move my repos from Github to either sourcehut or codeberg and pay for what it's worth. TiddlyWiki is still simply a great one-person wiki. And the bookmark app is still pretty cromulent for my purposes.
+</p> 
+<p>
+So, seems I should have taken my own advice: what I need more than anything else is focus. Which means being ruthless with distractions. No <a href="https://olano.dev/blog/hyperbolic-time-chamber-projects/">Hyperbolic Time Chamber Projects</a>, scrape the <a href="/articles/write-down-your-makers-bucket-list/">makers bucket-list</a>. 
+</p>
+
+<time datetime="2025-12-09 20:15"></time>
+</article>
+
 <article id="2025-12-08">
 <p>
 Some time ago <a href="/notes/#2025-03-31">I quoted Nassim Taleb</a>, and it bears repeating to myself: <q>Respect for the time-honored implies a minimal exposure to the media as a guiding principle for someone involved in decision making under uncertainty.</q>
@@ -885,6 +912,14 @@ Did I ever tell you that I was once named as <a href="https://en.wikipedia.org/w
 </article>
 
 <h1 style="display: none;">Notes</h1>
+
+<script>
+let notes = document.querySelectorAll("article");
+notes.forEach(note => {
+    let timeEl = note.querySelector("time");
+    timeEl.innerHTML = `<a href="/notes/${note.id}/">${timeEl.innerHTML}</a>`
+});
+</script>
 
 <intertwingle plugin="extract-feed"
               description="Notes"
